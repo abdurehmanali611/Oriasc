@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Navbar from "./Navbar";
+import { Icon } from "@iconify/react";
 
 const Header = () => {
   return (
@@ -34,25 +35,29 @@ const Header = () => {
                   className="text-gray-900 px-2 transition-all duration-500 hover:text-[#F1C152]"
                   href=""
                 >
-                  <i className="fab fa-facebook-f transition-all duration-500"></i>
+                  <Icon
+                    icon="ph:facebook-logo-duotone"
+                    width="25"
+                    height="25"
+                  />
                 </Link>
                 <Link
                   className="text-gray-900 px-2 transition-all duration-500 hover:text-[#F1C152]"
                   href=""
                 >
-                  <i className="fab fa-twitter transition-all duration-500"></i>
+                  <Icon icon="openmoji:twitter" width="25" height="25" />
                 </Link>
                 <Link
                   className="text-gray-900 px-2 transition-all duration-500 hover:text-[#F1C152]"
                   href=""
                 >
-                  <i className="fab fa-linkedin-in transition-all duration-500"></i>
+                  <Icon icon="skill-icons:linkedin" width="25" height="25" />
                 </Link>
                 <Link
                   className="text-gray-900 px-2 transition-all duration-500 hover:text-[#F1C152]"
                   href=""
                 >
-                  <i className="fab fa-instagram transition-all duration-500"></i>
+                  <Icon icon="skill-icons:instagram" width="25" height="25" />{" "}
                 </Link>
               </div>
             </div>

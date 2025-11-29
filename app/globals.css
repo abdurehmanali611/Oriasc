@@ -112,6 +112,48 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* app/globals.css or styles/globals.css */
+
+/* app/globals.css or styles/globals.css */
+
+/* Testimonial Swiper Styles */
+.testimonial-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+.testimonial-swiper .swiper-slide > div {
+  width: 100%;
+}
+
+.testimonial-swiper .swiper-pagination {
+  position: relative;
+  bottom: 0;
+  margin-top: 2rem;
+}
+
+.testimonial-swiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: #10b982;
+  opacity: 0.3;
+  transition: all 0.3s;
+}
+
+.testimonial-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #10b982;
+  width: 30px;
+  border-radius: 6px;
+}
+
+/* Ensure equal height cards */
+.testimonial-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

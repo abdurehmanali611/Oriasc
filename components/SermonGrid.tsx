@@ -1,0 +1,49 @@
+// components/SermonsGrid.tsx
+import SectionHeader from './SectionHeader';
+import SermonItem from './SermonItem';
+
+interface Sermon {
+  image?: string;
+  date: string;
+  title: string;
+  speaker?: string;
+  delay: string;
+  description: string;
+  slug?: string;
+}
+
+interface SermonsGridProps {
+  sermons: Sermon[];
+}
+
+export default function SermonsGrid({ sermons }: SermonsGridProps) {
+  return (
+    <>
+      {/* Sermons Grid Start */}
+      <div className="w-full py-5">
+        <div className="container mx-auto px-4 py-5 flex flex-col gap-5">
+          <SectionHeader 
+            subtitle="Sermons"
+            title="Join The Islamic Community"
+          />
+          
+          <div className="flex flex-wrap justify-between items-center -mx-2">
+            {sermons.map((sermon, index) => (
+              <SermonItem 
+                key={index}
+                image={sermon.image}
+                date={sermon.date}
+                title={sermon.title}
+                speaker={sermon.speaker ?? 'Admin'}
+                delay={sermon.delay}
+                description={sermon.description}
+                slug={sermon.slug}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Sermons Grid End */}
+    </>
+  );
+}
