@@ -1,8 +1,7 @@
-// components/AboutContent.tsx
-import { Icon } from '@iconify/react';
-import { Check, Eye, Flag } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Icon } from "@iconify/react";
+import { Check, Eye, Flag } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface AboutData {
   title?: string;
@@ -26,20 +25,13 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
   const {
     title = "Allah Help Those Who Help Others",
     subtitle = "About ORIASC",
-    description = "Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam. Etiam quis mauris justo. Vivamus purus nulla, rutrum ac risus in.",
+    description = "Oromiya Region Islamic Affairs Supreme Council was established in 1997 and reestablished pursuant to the enactment of the federal law act Federal Negarete Gazette in 2020 in the Oromiya Region and is a statutory council under the Ethiopian Islamic Affairs Supreme Council.",
     visionTitle = "Our Vision",
-    visionText = "Lorem ipsum dolor sit amet tetur nod elit sed",
+    visionText = "use modern management style and as a result awarded and capable Muslim society will be created and also religious, economic and social benefits will be secured",
     missionTitle = "Our Mission",
-    missionText = "Lorem ipsum dolor sit amet tetur nod elit sed",
-    testimonialText = "Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam. Etiam quis mauris justo.",
-    raisedAmount = "$20,46",
-    ctaTitle = "Every Muslim Needs To Realise The Importance Of The \"Pillar\" Of Islam",
-    features = [
-      "Charity & Donation",
-      "Parent Education",
-      "Hadith & Sunnah",
-      "Mosque Development"
-    ]
+    missionText = "Regional Muslim Council follow inclusive approach, exercise religious rules, practices good manner",
+    testimonialText = "Ethiopia was one of the first countries which took part in playing its role during infant stage of Islam",
+    ctaTitle = 'Every Muslim Needs To Realise The Importance Of The "Pillar" Of Islam',
   } = aboutData || {};
 
   return (
@@ -57,7 +49,7 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
                     alt="About image 1"
                     width={400}
                     height={600}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-xl"
                   />
                 </div>
                 <div className="w-[calc(50%-0.5rem)]">
@@ -66,14 +58,14 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
                     alt="About image 2"
                     width={400}
                     height={300}
-                    className="w-full pb-3"
+                    className="w-full pb-3 rounded-xl"
                   />
                   <Image
                     src="/assets/about-3.jpg"
                     alt="About image 3"
                     width={400}
                     height={300}
-                    className="w-full pt-3"
+                    className="w-full pt-3 rounded-xl"
                   />
                 </div>
               </div>
@@ -81,7 +73,9 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
 
             {/* Content */}
             <div className="w-full xl:w-[calc(50%-1.25rem)]">
-              <p className="text-xl uppercase text-[#10b982]">{subtitle}</p>
+              <p className="text-xl uppercase text-[#10b982] pb-4">
+                {subtitle}
+              </p>
               <h1 className="text-5xl font-bold font-sans pb-4 m-0">{title}</h1>
               <p className="pb-4">{description}</p>
 
@@ -89,31 +83,31 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
               <div className="flex flex-wrap gap-4 mb-4">
                 <div className="w-full md:w-[calc(50%-0.5rem)]">
                   <div className="ps-3 flex items-center justify-start">
-                    <span className="bg-[#10b982] w-16 h-16 flex items-center justify-center rounded-full mt-4 me-2">
-                      <Eye />
+                    <span className="bg-[#10b982] w-8 h-8 flex items-center justify-center rounded-full mt-4 me-2">
+                      <Eye className="text-white" />
                     </span>
-                    <div className="ms-4">
-                      <h5 className="text-xl font-semibold font-sans">{visionTitle}</h5>
-                      <p>{visionText}</p>
-                    </div>
+                    <h5 className="text-xl font-semibold font-sans mt-4">
+                      {visionTitle}
+                    </h5>
                   </div>
+                  <p>{visionText}</p>
                 </div>
                 <div className="w-full md:w-[calc(50%-0.5rem)]">
-                  <div className="ps-3 flex items-center justify-start">
-                    <span className="bg-[#10b982] w-16 h-16 flex items-center justify-center rounded-full mt-4 me-2">
-                      <Flag />
+                  <div className="ps-3 flex items-center gap-2">
+                    <span className="bg-[#10b982] w-8 h-8 rounded-full mt-4 me-2 flex items-center justify-center">
+                      <Flag className="text-white w-4 h-4" />
                     </span>
-                    <div className="ms-4">
-                      <h5 className="text-xl font-semibold font-sans">{missionTitle}</h5>
-                      <p>{missionText}</p>
-                    </div>
+                    <h5 className="text-xl font-semibold font-sans mt-3">
+                      {missionTitle}
+                    </h5>
                   </div>
+                  <p>{missionText}</p>
                 </div>
               </div>
 
               {/* Testimonial Card */}
-              <div className="bg-[#F8F9FA] p-3 mb-4">
-                <div className="flex flex-wrap items-center justify-center">
+              <div className="bg-[#F8F9FA] p-3 mb-4 rounded-xl">
+                <div className="flex flex-wrap items-center justify-center gap-4">
                   <div className="w-3/12">
                     <Image
                       src="/assets/about-child.jpg"
@@ -126,36 +120,6 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
                   <div className="w-6/12">
                     <p className="mb-0">{testimonialText}</p>
                   </div>
-                  <div className="w-3/12">
-                    <h2 className="mb-0 text-[#10b982] text-center font-bold font-sans">
-                      {raisedAmount}
-                    </h2>
-                    <h5 className="mb-0 text-center font-semibold font-sans">Raised</h5>
-                  </div>
-                </div>
-              </div>
-
-              {/* Features List */}
-              <div className="flex flex-wrap gap-2">
-                <div className="w-full md:w-[calc(50%-0.25rem)]">
-                  <p className="mb-2">
-                    <Check />
-                    {features[0]}
-                  </p>
-                  <p className="mb-0">
-                    <Check />
-                    {features[1]}
-                  </p>
-                </div>
-                <div className="w-full md:w-[calc(50%-0.25rem)]">
-                  <p className="mb-2">
-                   <Check />
-                    {features[2]}
-                  </p>
-                  <p className="mb-0">
-                    <Check />
-                    {features[3]}
-                  </p>
                 </div>
               </div>
             </div>
@@ -168,11 +132,13 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
                 <Icon icon="noto:mosque" width="128" height="128" />
               </div>
               <div className="w-full lg:w-7/12 text-center lg:text-left">
-                <h1 className="mb-0 text-4xl font-bold font-sans">{ctaTitle}</h1>
+                <h1 className="mb-0 text-4xl font-bold font-sans">
+                  {ctaTitle}
+                </h1>
               </div>
               <div className="w-full lg:w-3/12">
                 <Link
-                  href="/about"
+                  href="/About"
                   className="inline-flex items-center justify-center px-4 py-2 bg-[#F8F9FA] text-[#0C1214] font-semibold rounded transition-all duration-500 border-0 hover:bg-[#0C1214] hover:text-[#F8F9FA]"
                 >
                   Learn More

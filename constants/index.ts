@@ -1,205 +1,229 @@
-import { Book, BookOpen, GraduationCap, HandHeart, Users } from "lucide-react";
+import {
+  GetActivity,
+  GetBlog,
+  GetEvent,
+  GetHero,
+  GetSermon,
+  GetTeam,
+  GetTestimonial,
+} from "@/lib/actions";
 
-export const activities = [
-    {
-      icon: 'fa6-solid:mosque',
-      title: 'Mosque Development',
-      description: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      delay: '0.1s'
-    },
-    {
-      icon: 'mdi:hand-heart',
-      title: 'Charity & Donation',
-      description: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      delay: '0.3s'
-    },
-    {
-      icon: 'fa6-solid:quran',
-      title: 'Quran Learning',
-      description: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      delay: '0.5s'
-    },
-    {
-      icon: 'mdi:book-open-page-variant',
-      title: 'Hadith & Sunnah',
-      description: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      delay: '0.1s'
-    },
-    {
-      icon: 'mdi:school',
-      title: 'Parent Education',
-      description: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      delay: '0.3s'
-    },
-    {
-      icon: 'mdi:account-group',
-      title: 'Help Orphans',
-      description: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      delay: '0.5s'
-    }
-  ];
+const dummyHero = [
+  {
+    id: 1,
+    Title: "Welcome to Our Community",
+    Body: "Join us in building a stronger, more connected community through faith and service.",
+    startDate: new Date().toLocaleDateString(),
+    endDate: new Date(
+      Date.now() + 30 * 24 * 60 * 60 * 1000
+    ).toLocaleDateString(),
+    ImageUrl: "/assets/hero.jpg",
+  },
+];
 
-export const blogs = [
-    {
-      image: '/assets/blog-1.jpg',
-      date: '01 Jan 2024',
-      title: 'The Importance of Daily Prayer',
-      excerpt: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      author: 'Sheikh Ahmed',
-      delay: '0.1s',
-      slug: 'importance-of-daily-prayer'
-    },
-    {
-      image: '/assets/blog-2.jpg',
-      date: '15 Jan 2024',
-      title: 'Understanding Ramadan',
-      excerpt: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      author: 'Imam Hassan',
-      delay: '0.3s',
-      slug: 'understanding-ramadan'
-    },
-    {
-      image: '/assets/blog-3.jpg',
-      date: '20 Jan 2024',
-      title: 'Community Service in Islam',
-      excerpt: 'Lorem ipsum dolor sit amet elit. Donec tempus eros vel dolor mattis aliquam.',
-      delay: '0.5s',
-      slug: 'community-service-in-islam'
-    }
-  ];
+const dummyActivities = [
+  {
+    id: 1,
+    Title: "Community Outreach",
+    Description:
+      "Helping those in need through various community programs and initiatives.",
+    Stat: 150,
+    DateTime: new Date().toLocaleDateString("en-US"),
+  }
+];
 
-export const events = [
-    {
-      date: '15 Feb 2024',
-      time: 'Fri 18:00',
-      title: 'Ramadan Preparation Workshop',
-      description: 'Join us for a comprehensive workshop on preparing for the blessed month of Ramadan.',
-      image: '/assets/events-1.jpg',
-      delay: '0.1s',
-      slug: 'ramadan-preparation-workshop'
-    },
-    {
-      date: '22 Feb 2024',
-      time: 'Sat 14:00',
-      title: 'Community Iftar Gathering',
-      description: 'Break your fast with the community in a warm and welcoming environment.',
-      image: '/assets/events-2.jpg',
-      delay: '0.3s',
-      slug: 'community-iftar-gathering'
-    },
-    {
-      date: '01 Mar 2024',
-      time: 'Sun 10:00',
-      title: 'Youth Islamic Education Program',
-      description: 'Educational program designed for youth to learn about Islamic values and principles.',
-      image: '/assets/events-3.jpg',
-      delay: '0.5s',
-      slug: 'youth-islamic-education-program'
-    }
-  ];
+const dummyBlogs = [
+  {
+    id: 1,
+    Title: "Getting Started with Our Community",
+    Description:
+      "Learn more about our mission, values, and how you can get involved.",
+    Slug: "getting-started",
+    ImageUrl: "/assets/blog-1.jpg",
+    Author: "Admin",
+    createdAt: new Date().toDateString(),
+  },
+];
 
-export const sermons = [
-    {
-      image: '/assets/sermon-1.jpg',
-      date: '13 Nov 2024',
-      title: 'The Importance of Patience in Islam',
-      speaker: 'Sheikh Ahmed',
-      delay: '0.1s',
-      description: 'A powerful sermon about the virtue of patience and its significance in our daily lives.',
-      slug: 'importance-of-patience'
-    },
-    {
-      image: '/assets/sermon-2.jpg',
-      date: '20 Nov 2024',
-      title: 'Understanding the Five Pillars',
-      speaker: 'Imam Hassan',
-      delay: '0.3s',
-      description: 'An in-depth discussion on the fundamental pillars of Islam and their practical application.',
-      slug: 'understanding-five-pillars'
-    },
-    {
-      image: '/assets/sermon-3.jpg',
-      date: '27 Nov 2024',
-      title: 'The Power of Dua',
-      speaker: 'Sheikh Mohammed',
-      delay: '0.5s',
-      description: 'Learn about the significance of supplication and how to make effective dua.',
-      slug: 'power-of-dua'
-    }
-  ];
+const dummyEvents = [
+  {
+    id: 1,
+    Title: "Weekly Gathering",
+    Slug: "weekly-gathering",
+    Description: "Join us for our weekly community gathering and fellowship.",
+    ImageUrl: "/assets/events-1.jpg",
+    StartDate: new Date().toLocaleDateString("en-US"),
+    EndDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString(
+      "en-US"
+    ),
+  },
+];
 
-export const leader = {
-    image: '/assets/team-1.jpg',
-    name: 'Anamul Hasan',
-    role: 'President',
-    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    social: {
-      facebook: 'https://facebook.com/profile',
-      twitter: 'https://twitter.com/profile',
-      instagram: 'https://instagram.com/profile',
-      linkedin: 'https://linkedin.com/in/profile'
-    }
-  };
+const dummySermons = [
+  {
+    id: 1,
+    Title: "Faith and Community",
+    Slug: "faith-community",
+    Description:
+      "Exploring the importance of faith in building strong communities.",
+    ImageVideoUrl: "/assets/sermon-1.jpg",
+    Speaker: "Guest Speaker",
+  },
+];
 
- export const teamMembers = [
-    {
-      image: '/assets/team-2.jpg',
-      name: 'Ahmed Ali',
-      position: 'Vice President',
-      delay: '0.2s',
-      social: {
-        facebook: '#',
-        twitter: '#',
-        instagram: '#',
-        linkedin: '#'
-      }
-    },
-    {
-      image: '/assets/team-3.jpg',
-      name: 'Fatima Hassan',
-      position: 'Secretary',
-      delay: '0.4s',
-      social: {
-        facebook: '#',
-        twitter: '#',
-        instagram: '#',
-        linkedin: '#'
-      }
-    },
-    {
-      image: '/assets/team-4.jpg',
-      name: 'Omar Ibrahim',
-      position: 'Treasurer',
-      delay: '0.6s',
-      social: {
-        facebook: '#',
-        twitter: '#',
-        instagram: '#',
-        linkedin: '#'
-      }
-    }
-  ];
+const dummyTeamLeaders = [
+  {
+    id: 1,
+    Name: "Dr. Sherif Ali",
+    Position: "general manager",
+    ImageUrl: "/assets/team-1.jpg",
+    Facebook: "#",
+    Instagram: "#",
+    LinkedIn: "#",
+  },
+  {
+    id: 2,
+    Name: "Community Leader",
+    Position: "Director",
+    ImageUrl: "/assets/team-2.jpg",
+    Facebook: "#",
+    Instagram: "#",
+    LinkedIn: "#",
+  },
+  {
+    id: 3,
+    Name: "Community Leader",
+    Position: "Director",
+    ImageUrl: "/assets/team-3.jpg",
+    Facebook: "#",
+    Instagram: "#",
+    LinkedIn: "#",
+  }
+];
 
-export const testimonials = [
-    {
-      image: '/assets/testimonial-1.jpg',
-      name: 'Sarah Ahmed',
-      profession: 'Community Member',
-      content: 'The Islamic center has been a blessing for our family. The programs and activities have helped us grow spiritually and connect with our community.',
-      rating: 5
-    },
-    {
-      image: '/assets/testimonial-2.jpg',
-      name: 'Mohammed Ali',
-      profession: 'Youth Program Participant',
-      content: 'I have learned so much about my faith through the educational programs. The teachers are knowledgeable and caring.',
-      rating: 5
-    },
-    {
-      image: '/assets/testimonial-3.jpg',
-      name: 'Aisha Khan',
-      profession: 'Volunteer',
-      content: 'Being part of this community has enriched my life. The charity work and community service opportunities are truly impactful.',
-      rating: 5
-    }
-  ];
+const dummyTestimonials = [
+  {
+    id: 1,
+    Name: "Community Member",
+    Proffession: "Local Resident",
+    ImageUrl: "/assets/testimonial-1.jpg",
+    Content:
+      "This community has been a blessing to me and my family. The support and fellowship we've found here is truly remarkable.",
+    Rating: 5,
+  },
+];
+
+const fetchedActivities = await GetActivity();
+const fetchedHero = await GetHero();
+const fetchedBlogs = await GetBlog();
+const fetchedEvents = await GetEvent();
+const fetchedSermons = await GetSermon();
+const fetchedTestimonials = await GetTestimonial();
+const fetchedTeam = await GetTeam()
+
+export const activities =
+  fetchedActivities && fetchedActivities.length > 0
+    ? fetchedActivities
+    : dummyActivities;
+
+export const Hero =
+  fetchedHero && fetchedHero.length > 0 ? fetchedHero : dummyHero;
+
+export const blogs =
+  fetchedBlogs && fetchedBlogs.length > 0 ? fetchedBlogs : dummyBlogs;
+
+export const events =
+  fetchedEvents && fetchedEvents.length > 0 ? fetchedEvents : dummyEvents;
+
+export const sermons =
+  fetchedSermons && fetchedSermons.length > 0 ? fetchedSermons : dummySermons;
+
+export const leader = fetchedTeam && fetchedTeam.length > 0 ? fetchedTeam : dummyTeamLeaders
+
+export const testimonials =
+  fetchedTestimonials && fetchedTestimonials.length > 0
+    ? fetchedTestimonials
+    : dummyTestimonials;
+
+export const AbsoluteAdminList = [
+  {
+    id: 1,
+    name: "Dashboard",
+    icon: "fluent-color:home-16",
+  },
+  {
+    id: 2,
+    name: "Hero",
+    icon: "openmoji:superhero",
+  },
+  {
+    id: 3,
+    name: "Activities",
+    icon: "lucide:activity",
+  },
+  {
+    id: 4,
+    name: "Events",
+    icon: "clarity:event-solid",
+  },
+  {
+    id: 5,
+    name: "Blogs",
+    icon: "streamline-ultimate-color:blogger-logo",
+  },
+  {
+    id: 6,
+    name: "Sermons",
+    icon: "catppuccin:video",
+  },
+  {
+    id: 7,
+    name: "Team",
+    icon: "fluent-color:people-team-16",
+  },
+  {
+    id: 8,
+    name: "Testimonial",
+    icon: "dashicons:testimonial",
+  },
+  {
+    id: 9,
+    name: "Contact",
+    icon: "streamline-ultimate-color:messages-logo"
+  }
+];
+
+export const cta_links = [
+  {
+    id: 1,
+    name: "About",
+  },
+  {
+    id: 2,
+    name: "Activities",
+  },
+  {
+    id: 3,
+    name: "Events",
+  },
+  {
+    id: 4,
+    name: "Blog",
+  },
+  {
+    id: 5,
+    name: "Sermons",
+  },
+  {
+    id: 6,
+    name: "Contact",
+  },
+  {
+    id: 7,
+    name: "Team",
+  },
+  {
+    id: 8,
+    name: "Testimonial",
+  },
+];

@@ -162,3 +162,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Force Cloudinary Widget to appear above ShadCN/Radix Dialogs */
+iframe[data-test="uw-iframe"] {
+  z-index: 9999 !important;
+}
+
+/* Ensure the Cloudinary modal overlay covers everything */
+.widget-overlay {
+  z-index: 9998 !important;
+}

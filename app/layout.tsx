@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Spinner from "@/components/Spinner";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,23 +15,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "ORIASC",
-  description: "Oromia Region Islamic Affairs supreme Council",
+  description: "Oromia Region Islamic Affairs Supreme Council",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Spinner />
-        <Header />
         {children}
-        <Footer />
+        <Toaster />
       </body>
     </html>
   );

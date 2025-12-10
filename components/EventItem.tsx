@@ -1,54 +1,44 @@
-// components/EventItem.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface EventItemProps {
-  date?: string;
-  time?: string;
+  startDate?: string;
+  endDate?: string;
   title?: string;
   description?: string;
   image?: string;
-  delay?: string;
   slug?: string;
 }
 
 export default function EventItem({ 
-  date = '01 Jan 2045',
-  time = 'Fri 06:55',
-  title = 'Event Title',
-  description = 'Event description',
-  image = '/assets/events-1.jpg',
-  delay = '0.1s',
-  slug = '#'
+  startDate,
+  endDate,
+  title,
+  description,
+  image,
+  slug
 }: EventItemProps) {
   return (
     <div 
-      className="flex justify-between items-center gap-4 wow fadeInUp" 
-      data-wow-delay={delay}
+      className="flex flex-col lg:flex-row justify-between items-center gap-4 wow fadeInUp mb-8 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300" 
     >
-      <div className="w-1/4 lg:w-1/6 pr-0">
-        <div className="text-center border-b border-[#0C1214] py-3 px-2">
-          <h6 className="text-base font-semibold font-sans">{date}</h6>
-          <p className="mb-0 text-sm">{time}</p>
+      <div className="w-full lg:w-1/4 xl:w-1/6 pr-0">
+        <div className="text-center border-b border-[#10b982] py-3 px-2 bg-[#10b982]/5 rounded">
+          <h6 className="text-base font-semibold font-sans text-[#10b982]">{startDate || "TBD"}</h6>
+          <p className="mb-0 text-sm text-gray-600">{endDate || "TBD"}</p>
         </div>
       </div>
-      <div className="w-3/4 lg:w-1/2 border-l border-[#0C1214] pb-5">
-        <div className="ml-3">
+      <div className="w-full lg:w-3/4 xl:w-1/2 border-l border-[#10b982]/30 pb-5 lg:pb-0">
+        <div className="ml-0 lg:ml-3">
           <h4 className="mb-3 text-2xl font-bold font-sans">{title}</h4>
           <p className="mb-4 w-[65%]">{description}</p>
-          <Link 
-            href={`/events/${slug}`}
-            className="inline-flex items-center justify-center px-3 py-2 bg-[#10b982] text-[#0C1214] font-semibold transition-all duration-500 hover:bg-[#0C1214] hover:text-[#10b982]"
-          >
-            Join Now
-          </Link>
         </div>
       </div>
       <div className="w-full lg:w-1/3">
         <div className="overflow-hidden mb-5 relative h-48">
           <Image
-            src={image}
-            alt={title}
+            src={image ?? "/assets/events-1.jpg"}
+            alt={title ?? "Image"}
             fill
             className="object-cover transition-all duration-500 hover:scale-110"
           />

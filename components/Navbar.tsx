@@ -11,26 +11,23 @@ export default function Navbar({ active = "index" }) {
 
   const getActiveState = () => {
     if (pathname === "/") return "index";
-    if (pathname === "/about") return "about";
-    if (pathname === "/activities") return "activities";
-    if (pathname === "/events") return "events";
-    if (pathname === "/sermons") return "sermons";
-    if (pathname === "/blog") return "blog";
-    if (pathname === "/team") return "team";
-    if (pathname === "/testimonial") return "testimonial";
-    if (pathname === "/404") return "404";
-    if (pathname === "/contact") return "contact";
+    if (pathname === "/About") return "about";
+    if (pathname === "/Activities") return "activities";
+    if (pathname === "/Events") return "events";
+    if (pathname === "/Sermons") return "sermons";
+    if (pathname === "/Blog") return "blog";
+    if (pathname === "/Team") return "team";
+    if (pathname === "/Testimonial") return "testimonial";
+    if (pathname === "/Contact") return "contact";
     return active;
   };
 
   const currentActive = getActiveState();
-  const pagesActive = ["blog", "team", "testimonial", "404"].includes(
-    currentActive
-  );
+  const pagesActive = ["Blog", "Team", "Testimonial"].includes(currentActive);
 
   return (
     <div className="container mx-auto px-4 border-b border-white/50">
-      <nav className="flex items-center justify-between py-3 px-5">
+      <nav className="flex items-center justify-between py-3 px-5 bg-linear-to-r from-[#9d5e43] to-[#10b982]">
         <Link href="/" className="inline-block">
           <h1 className="mb-0 text-[#10b982] font-bold font-sans text-2xl">
             ORIASC
@@ -182,7 +179,7 @@ export default function Navbar({ active = "index" }) {
 
           <Link
             href="/Admin"
-            className="block xl:inline-flex items-center justify-center bg-[#10b982] text-[#0C1214] py-2 px-4 font-semibold transition-all duration-500 hover:bg-black hover:text-[#10b982] hover:border-[#0C1214] rounded-xl m-3 lg:m-0"
+            className="block xl:inline-flex items-center justify-center bg-[#001100] text-white py-3 px-4 font-semibold transition-all duration-500 hover:bg-black hover:text-[#10b982] hover:border-[#0C1214] rounded-xl m-3 lg:m-0"
           >
             Admin Dashboard
           </Link>
