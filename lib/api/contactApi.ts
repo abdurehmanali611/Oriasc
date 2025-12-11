@@ -2,7 +2,7 @@ import axios from "axios";
 import { ContactFormData } from "@/lib/schemas/contactSchema";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+  process.env.NEXT_PUBLIC_API_URL || "https://oriasc-backend.vercel.app/api";
 
 export interface ContactSubmission {
   id: number;
