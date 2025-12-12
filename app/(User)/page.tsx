@@ -1,3 +1,5 @@
+"use client"
+import { useLayoutEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import AboutContent from "@/components/About";
 import ActivitiesGrid from "@/components/ActivityGrid";
@@ -17,11 +19,25 @@ import {
 import Link from "next/link";
 
 export default function UserHome() {
-  const sampleActivities = activities.slice(0, 3);
-  const sampleEvents = events.slice(0, 3);
-  const sampleSermons = sermons.slice(0, 3);
-  const sampleBlogs = blogs.slice(0, 3);
-  const sampleTestimonials = testimonials.slice(0, 3);
+  const [dynamicActivities, setDynamicActivities] = useState(activities);
+  const [dynamicEvents, setDynamicEvents] = useState(events);
+  const [dynamicSermons, setDynamicSermons] = useState(sermons);
+  const [dynamicBlogs, setDynamicBlogs] = useState(blogs);
+  const [dynamicTestimonials, setDynamicTestimonials] = useState(testimonials);
+
+  useLayoutEffect(() => {
+    setDynamicActivities(activities);
+    setDynamicEvents(events);
+    setDynamicSermons(sermons);
+    setDynamicBlogs(blogs);
+    setDynamicTestimonials(testimonials);
+  }, [activities, events, sermons, blogs, testimonials]); 
+
+  const sampleActivities = dynamicActivities.slice(0, 3);
+  const sampleEvents = dynamicEvents.slice(0, 3);
+  const sampleSermons = dynamicSermons.slice(0, 3);
+  const sampleBlogs = dynamicBlogs.slice(0, 3);
+  const sampleTestimonials = dynamicTestimonials.slice(0, 3);
 
   return (
     <div>
@@ -29,7 +45,7 @@ export default function UserHome() {
       <AboutContent />
       <div className="relative">
         <ActivitiesGrid activities={sampleActivities} />
-        {activities.length > 3 && (
+        {dynamicActivities.length > 3 && (
           <div className="text-center pb-8">
             <Link
               href="/Activities"
@@ -41,10 +57,9 @@ export default function UserHome() {
         )}
       </div>
 
-      {/* Events Section with View All Link */}
       <div className="relative">
         <EventsList events={sampleEvents} />
-        {events.length > 3 && (
+        {dynamicEvents.length > 3 && (
           <div className="text-center pb-8">
             <Link
               href="/Events"
@@ -59,7 +74,7 @@ export default function UserHome() {
       {/* Sermons Section with View All Link */}
       <div className="relative">
         <SermonsGrid sermons={sampleSermons} />
-        {sermons.length > 3 && (
+        {dynamicSermons.length > 3 && (
           <div className="text-center pb-8">
             <Link
               href="/Sermons"
@@ -74,7 +89,7 @@ export default function UserHome() {
       {/* Blog Section with View All Link */}
       <div className="relative">
         <BlogGrid blogs={sampleBlogs} />
-        {blogs.length > 3 && (
+        {dynamicBlogs.length > 3 && (
           <div className="text-center pb-8">
             <Link
               href="/Blog"
@@ -89,7 +104,7 @@ export default function UserHome() {
       <TeamSection leader={leader} />
       <div className="relative">
         <TestimonialsCarousel testimonials={sampleTestimonials} />
-        {testimonials.length > 3 && (
+        {dynamicTestimonials.length > 3 && (
           <div className="text-center pb-8">
             <Link
               href="/Testimonial"

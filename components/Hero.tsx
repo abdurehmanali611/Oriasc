@@ -1,7 +1,7 @@
 "use client";
 import { Hero as HeroData } from "@/constants";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 interface HeroProps {
   title?: string;
@@ -40,7 +40,7 @@ export default function Hero({ title }: HeroProps) {
         })
       : [];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     activeHeroes;
   });
 
