@@ -49,9 +49,9 @@ export default function Navbar({ active = "index" }) {
         <div
           className={`${
             mobileMenuOpen ? "block" : "hidden"
-          } lg:flex lg:items-center lg:justify-between lg:flex-1 transition-all duration-300 absolute lg:relative top-full left-0 w-full bg-[#61CE70] lg:bg-transparent shadow-lg lg:shadow-none z-50`}
+          } lg:flex lg:items-center lg:justify-between lg:flex-1 transition-all duration-300 absolute lg:relative top-full left-0 w-full bg-[#61CE70] lg:bg-transparent shadow-lg lg:shadow-none z-50 max-h-[80vh] overflow-y-auto no-scrollbar`}
         >
-          <div className="flex flex-row flex-wrap justify-center lg:flex-row lg:ml-auto lg:mx-auto ">
+          <div className="flex flex-col gap-5 lg:flex-row lg:ml-auto lg:mx-auto">
             <Link
               href="/"
               className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${

@@ -39,7 +39,7 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
       {/* About Content Start */}
       <div className="w-full px-4 py-5">
         <div className="container mx-auto py-5">
-          <div className="flex flex-wrap gap-5 mb-5">
+          <div className="flex flex-col-reverse sm:flex-row sm:flex-wrap gap-5 mb-5">
             {/* Image Grid */}
             <div className="w-full xl:w-[calc(50%-1.25rem)]">
               <div className="flex flex-wrap gap-4">
