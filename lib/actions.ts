@@ -11,7 +11,7 @@ interface cloudinarySuccessResult {
   };
 }
 
-const api = "http://localhost:8000/api"
+const api = "https://oriasc-backend.vercel.app/api"
 
 export async function ContactResponse(
   to: string | string[],
