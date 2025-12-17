@@ -9,11 +9,11 @@ class AuthController extends Controller
 {
     public function login(Request $request) {
        $validated = $request->validate([
-            'Email' => 'required|email',
+            'UserName' => 'required|string',
             'Password' => 'required'
         ]);
 
-        $admin = Admins::authentication($validated['Email'], $validated['Password']);
+        $admin = Admins::authentication($validated['UserName'], $validated['Password']);
 
         if ($admin) {
             return response()->json(['message' => 'Login Successful', 'admin' => $admin]);
@@ -23,7 +23,7 @@ class AuthController extends Controller
 
     public function CreateCred(Request $request) {
         $data = $request->validate([
-            "Email" => 'required|string',
+            "UserName" => 'required|string',
             "Password" => 'required|string'
         ]);
         $Auth = Admins::CreateCred($data);
@@ -40,7 +40,7 @@ class AuthController extends Controller
         $Auth = Admins::findOrFail($id);
 
         $data = $request->validate([
-            "Email" => 'sometimes|required|string',
+            "UserName" => 'sometimes|required|string',
             "Password" => 'sometimes|required|string'
         ]);
 

@@ -8,8 +8,8 @@ interface SectionHeaderProps {
 }
 
 export default function SectionHeader({ 
-  subtitle = 'Section Subtitle',
-  title = 'Section Title',
+  subtitle = '',
+  title = '',
   description = null,
   className = '',
   maxWidth = '700px'

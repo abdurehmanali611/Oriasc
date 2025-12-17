@@ -23,11 +23,11 @@ export default function BlogGrid({ blogs }: BlogGridProps) {
             className="text-5xl md:text-6xl font-bold font-sans mb-5 wow fadeIn"
             data-wow-delay="0.1s"
           >
-            Latest From <span className="text-[#10b982]">Our Blog</span>
+            Latest <span className="text-[#10b982]">News</span>
           </h1>
 
           {blogs && blogs.length > 0 ? (
-            <div className="flex flex-wrap -mx-4 gap-y-4 justify-center">
+            <div className="flex flex-wrap -mx-4 gap-y-4 justify-start my-7">
               {blogs.map((blog, index) => (
                 <BlogItem
                   key={index}

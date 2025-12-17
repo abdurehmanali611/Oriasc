@@ -66,7 +66,7 @@ export default function Hero({ title }: HeroProps) {
   }
 
   return (
-    <div className="w-full py-12 md:py-20 bg-gray-50">
+    <div className="w-full py-12 md:py-20 bg-gray-50 h-screen xl:h-screen">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12">
           {/* Image Section */}
@@ -90,14 +90,6 @@ export default function Hero({ title }: HeroProps) {
             <p className="text-lg md:text-xl mb-8 text-gray-700 leading-relaxed">
               {activeHero.Body}
             </p>
-            <div className="mt-8 pt-6 border-t border-gray-300">
-              <p className="text-sm text-gray-600">
-                <span className="font-semibold text-[#10b982]">
-                  Active Period:
-                </span>{" "}
-                {activeHero.startDate} - {activeHero.endDate}
-              </p>
-            </div>
           </div>
         </div>
       </div>

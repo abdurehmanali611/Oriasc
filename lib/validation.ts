@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const login = z.object({
-  Email: z.email("Please Enter Your Email"),
+  UserName: z.string().min(2, "Please Enter Your username"),
   Password: z.string().min(6, "Please Enter a valid Password"),
 });
 
@@ -85,3 +85,21 @@ export const TestimonialValidation = z.object({
     .max(5, "Rating cannot exceed 5")
     .or(z.literal(0)),
 });
+
+export const ServiceValidation = z.object({
+  Title: z.string().min(2, "Please Enter the Title"),
+  Description: z.string().min(2, "Please Enter the Description"),
+  ImageUrl: z.string().min(2, "Please Enter the button name to be displayed")
+})
+
+export const PartnerValidation = z.object({
+  Title: z.string().min(2, "Please Enter the Title"),
+  Type: z.string().min(2, "Please select the partner Type"),
+  logoUrl: z.string().min(2, "Please provide an image to be uploaded")
+})
+
+export const PasswordChangeValidation = z.object({
+  Old_Password: z.string().min(6, "Please Enter Your previous Password"),
+  New_Password: z.string().min(6, "Please Enter Your new Password"),
+  Confirm_Password: z.string().min(6, "Please Confirm Your new Password")
+})

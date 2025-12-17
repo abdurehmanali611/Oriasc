@@ -25,7 +25,7 @@ export default function SermonItem({
 }: SermonItemProps) {
   return (
     <div className="w-full lg:w-1/2 xl:w-1/3 px-4 wow fadeInUp">
-      <div className="h-full shadow-[0_0_45px_rgba(0,0,0,0.08)]">
+      <div className="h-full shadow-[0_0_45px_rgba(0,0,0,0.08)] rounded-lg overflow-hidden">
         <div className="overflow-hidden p-4 pb-0 relative h-64 rounded-t-lg">
           <Image
             src={image ?? "/assets/sermon-1.jpg"}
@@ -47,36 +47,8 @@ export default function SermonItem({
                 </Link>
               </small>
             </div>
-            <div className="flex gap-2">
-              <Link
-                href="#"
-                className="transition-all duration-500 hover:text-[#F1C152]"
-              >
-                <Video className="w-4 h-4 text-gray-500 transition-all duration-500" />
-              </Link>
-              <Link
-                href="#"
-                className="transition-all duration-500 hover:text-[#F1C152]"
-              >
-                <Headphones className="w-4 h-4 text-gray-500 transition-all duration-500" />
-              </Link>
-              <Link
-                href="#"
-                className="transition-all duration-500 hover:text-[#F1C152]"
-              >
-                <FileText className="w-4 h-4 text-gray-500 transition-all duration-500" />
-              </Link>
-              <Link
-                href="#"
-                className="transition-all duration-500 hover:text-[#F1C152]"
-              >
-                <ImageIcon className="w-4 h-4 text-gray-500 transition-all duration-500" />
-              </Link>
-            </div>
           </div>
-          <h4
-            className="inline-block text-2xl font-semibold font-sans leading-tight mb-3 transition-all duration-500 hover:text-[#10b982]"
-          >
+          <h4 className="inline-block text-2xl font-semibold font-sans leading-tight mb-3 transition-all duration-500 hover:text-[#10b982]">
             {title || "Untitled Sermon"}
           </h4>
           <p className="text-gray-700">

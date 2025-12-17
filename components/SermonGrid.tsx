@@ -22,7 +22,6 @@ export default function SermonsGrid({ sermons }: SermonsGridProps) {
         <div className="container mx-auto px-4 py-5 flex flex-col gap-5">
           <SectionHeader
             subtitle="Sermons"
-            title="Join The Islamic Community"
           />
 
           {sermons && sermons.length > 0 ? (

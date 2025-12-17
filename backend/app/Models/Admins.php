@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Admins extends Model
 {
-    protected $fillable = ['Email', 'Password'];
+    protected $fillable = ['UserName', 'Password'];
 
     /**
      * Automatically hash password when setting it
@@ -25,7 +25,7 @@ class Admins extends Model
 
     public static function authentication($email, $password)
     {
-        $admin = self::where('Email', $email)->first();
+        $admin = self::where('UserName', $email)->first();
 
         if ($admin) {
             $hashedInput = hash('sha256', $password);

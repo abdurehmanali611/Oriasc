@@ -3,7 +3,9 @@ import {
   GetBlog,
   GetEvent,
   GetHero,
+  GetPartner,
   GetSermon,
+  GetService,
   GetTeam,
   GetTestimonial,
 } from "@/lib/actions";
@@ -29,7 +31,7 @@ const dummyActivities = [
       "Helping those in need through various community programs and initiatives.",
     Stat: 150,
     DateTime: new Date().toLocaleDateString("en-US"),
-  }
+  },
 ];
 
 const dummyBlogs = [
@@ -98,7 +100,7 @@ const dummyTeamLeaders = [
     Facebook: "#",
     Instagram: "#",
     LinkedIn: "#",
-  }
+  },
 ];
 
 const dummyTestimonials = [
@@ -113,13 +115,47 @@ const dummyTestimonials = [
   },
 ];
 
+const dummyServices = [
+  {
+    Title: "Halal Service",
+    Description: "This community has been a blessing to me and my family. The support and fellowship we've found here is truly remarkable.",
+    ImageUrl: "/assets/hero.jpg"
+  }
+];
+
+const dummyPartners = [
+  {
+    Title: "EIASC",
+    Type: "Shariah Partner",
+    logoUrl: "/assets/logo.jpg"
+  },
+  {
+    Title: "EIASC",
+    Type: "Technology Partner",
+    logoUrl: "/assets/logo.jpg"
+  },
+  {
+    Title: "EIASC",
+    Type: "Business Partner",
+    logoUrl: "/assets/logo.jpg"
+  },
+  {
+    Title: "EIASC",
+    Type: "Community Partner",
+    logoUrl: "/assets/logo.jpg"
+  }
+]
+
 const fetchedActivities = await GetActivity();
 const fetchedHero = await GetHero();
 const fetchedBlogs = await GetBlog();
 const fetchedEvents = await GetEvent();
 const fetchedSermons = await GetSermon();
 const fetchedTestimonials = await GetTestimonial();
-const fetchedTeam = await GetTeam()
+const fetchedTeam = await GetTeam();
+const fetchedServices = await GetService();
+const fetchedPartners = await GetPartner();
+
 
 export const activities =
   fetchedActivities && fetchedActivities.length > 0
@@ -138,7 +174,14 @@ export const events =
 export const sermons =
   fetchedSermons && fetchedSermons.length > 0 ? fetchedSermons : dummySermons;
 
-export const leader = fetchedTeam && fetchedTeam.length > 0 ? fetchedTeam : dummyTeamLeaders
+export const leader =
+  fetchedTeam && fetchedTeam.length > 0 ? fetchedTeam : dummyTeamLeaders;
+
+export const Service =
+  fetchedServices && fetchedServices.length > 0 ? fetchedServices : dummyServices;
+
+export const Partner =
+  fetchedPartners && fetchedPartners.length > 0 ? fetchedPartners : dummyPartners;
 
 export const testimonials =
   fetchedTestimonials && fetchedTestimonials.length > 0
@@ -168,29 +211,44 @@ export const AbsoluteAdminList = [
   },
   {
     id: 5,
-    name: "Blogs",
-    icon: "streamline-ultimate-color:blogger-logo",
+    name: "Services",
+    icon: "flat-color-icons:services",
   },
   {
     id: 6,
+    name: "Partners",
+    icon: "arcticons:partners",
+  },
+  {
+    id: 7,
+    name: "News",
+    icon: "streamline-ultimate-color:blogger-logo",
+  },
+  {
+    id: 8,
     name: "Sermons",
     icon: "catppuccin:video",
   },
   {
-    id: 7,
+    id: 9,
     name: "Team",
     icon: "fluent-color:people-team-16",
   },
   {
-    id: 8,
+    id: 10,
     name: "Testimonial",
     icon: "dashicons:testimonial",
   },
   {
-    id: 9,
+    id: 11,
     name: "Contact",
-    icon: "streamline-ultimate-color:messages-logo"
-  }
+    icon: "streamline-ultimate-color:messages-logo",
+  },
+  {
+    id: 12,
+    name: "Change Password",
+    icon: "fluent-color:person-key-20",
+  },
 ];
 
 export const cta_links = [
@@ -227,3 +285,22 @@ export const cta_links = [
     name: "Testimonial",
   },
 ];
+
+export const partnerTypes = [
+  {
+    id: 1,
+    name: "Technology Partner"
+  },
+  {
+    id: 2,
+    name: "Shariah Partner"
+  },
+  {
+    id: 3,
+    name: "Business Partner"
+  },
+  {
+    id: 4,
+    name: "Community Partner"
+  }
+]

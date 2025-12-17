@@ -6,15 +6,19 @@ use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\HeroSectionController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\SermonsController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post("/CredPost", [AuthController::class, "CreateCred"]);
-Route::get("/GetCred", [AuthController::class, "CredFetch"]);
-Route::patch("/PatchCred/{id}", [AuthController::class, "UpdateCred"]);
+Route::group(['middleware' => ['cors']], function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post("/CredPost", [AuthController::class, "CreateCred"]);
+    Route::get("/GetCred", [AuthController::class, "CredFetch"]);
+    Route::patch("/PatchCred/{id}", [AuthController::class, "UpdateCred"]);
+});
 Route::post("/HeroPost", [HeroSectionController::class, "CreateHero"]);
 Route::get("/GetHero", [HeroSectionController::class, "HeroFetch"]);
 Route::patch("/PatchHero/{id}", [HeroSectionController::class, "UpdateHero"]);
@@ -43,6 +47,14 @@ Route::post("/TestimonialPost", [TestimonialController::class, "CreateTestimonia
 Route::get("/GetTestimonial", [TestimonialController::class, "TestimonialFetch"]);
 Route::patch("/PatchTestimonial/{id}", [TestimonialController::class, "UpdateTestimonial"]);
 Route::delete("/DeleteTestimonial/{id}", [TestimonialController::class, "DeleteTestimonial"]);
+Route::post("/ServicePost", [ServiceController::class, "CreateService"]);
+Route::get("/GetService", [ServiceController::class, "ServiceFetch"]);
+Route::patch("/PatchService/{id}", [ServiceController::class, "UpdateService"]);
+Route::delete("/DeleteService/{id}", [ServiceController::class, "DeleteService"]);
+Route::post("/PartnerPost", [PartnerController::class, "CreatePartner"]);
+Route::get("/GetPartner", [PartnerController::class, "PartnerFetch"]);
+Route::patch("/PatchPartner/{id}", [PartnerController::class, "UpdatePartner"]);
+Route::delete("/DeletePartner/{id}", [PartnerController::class, "DeletePartner"]);
 
 // Contact form routes
 Route::get('/contacts', [ContactController::class, 'index']);

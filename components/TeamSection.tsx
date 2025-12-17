@@ -50,10 +50,10 @@ export default function TeamSection({ leader }: TeamSectionProps) {
   return (
     <>
       <div className="w-full py-12 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4 py-12 md:py-20">
-          <SectionHeader subtitle="Our Team" title="Meet Our Organizer" />
+        <div className="container mx-auto px-4 py-4">
+          <SectionHeader subtitle="Our Management Team" />
 
-          <div className="flex flex-wrap -mx-4 gap-y-12">
+          <div className="flex flex-wrap -mx-4 gap-y-12 mt-12">
             {generalManager && (
               <>
                 <div className="w-full lg:w-1/3 xl:w-5/12 px-4">
@@ -63,10 +63,7 @@ export default function TeamSection({ leader }: TeamSectionProps) {
                   >
                     <div className="relative h-[500px] rounded-lg overflow-hidden">
                       <Image
-                        src={
-                          generalManager?.ImageUrl ||
-                          "/assets/team-1.jpg"
-                        }
+                        src={generalManager?.ImageUrl || "/assets/team-1.jpg"}
                         alt={generalManager?.Name || "Team Leader"}
                         fill
                         className="object-cover"

@@ -79,22 +79,19 @@ export default function ContactForm() {
   return (
     <>
       <div className="w-full py-5">
-        <div className="container mx-auto px-4 py-5 flex flex-col gap-10">
-          <SectionHeader
-            subtitle="Get In Touch"
-            title="Contact For Any Queries"
-          />
+        <div className="px-4 py-5 flex flex-col gap-10">
+          <SectionHeader subtitle="Get In Touch with us" />
           <Form {...form}>
             <form
-              className="flex flex-col gap-5 w-[50%] self-center"
+              className="flex flex-col gap-5 w-full self-center lg:w-[55%] md:w-[75%]"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-              <div className="flex justify-between items-center gap-5">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-5">
                 <FormField
                   name="full_name"
                   control={form.control}
                   render={({ field }) => (
-                    <FormItem className="w-1/2 flex flex-col gap-3">
+                    <FormItem className="w-full sm:w-1/2 flex flex-col gap-3">
                       <FormLabel>Full Name:</FormLabel>
                       <FormControl>
                         <Input
@@ -112,7 +109,7 @@ export default function ContactForm() {
                   name="email"
                   control={form.control}
                   render={({ field }) => (
-                    <FormItem className="w-1/2 flex flex-col gap-3">
+                    <FormItem className="w-full sm:w-1/2 flex flex-col gap-3">
                       <FormLabel>Email:</FormLabel>
                       <FormControl>
                         <Input

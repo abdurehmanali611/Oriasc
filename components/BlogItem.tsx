@@ -17,7 +17,6 @@ export default function BlogItem({
   title,
   description,
   author,
-  slug,
 }: BlogItemProps) {
   return (
     <div className="w-full lg:w-1/2 xl:w-1/3 px-4 wow fadeInUp">
@@ -45,28 +44,9 @@ export default function BlogItem({
                   By {author}
                 </Link>
               </small>
-              <small className="inline-flex items-center">
-                <MessageCircle className="w-4 h-4 mr-2 text-gray-500" />
-                <Link
-                  href="#"
-                  className="text-gray-500 transition-all duration-500 hover:text-[#10b982]"
-                >
-                  12 Comments
-                </Link>
-              </small>
-            </div>
-            <div>
-              <Link
-                href="#"
-                className="transition-all duration-500 hover:text-[#F1C152]"
-              >
-                <Bookmark className="w-4 h-4 text-gray-500 transition-all duration-500" />
-              </Link>
             </div>
           </div>
-          <h4
-            className="inline-block text-2xl font-semibold font-sans leading-tight mb-3 mt-3 transition-all duration-500 hover:text-[#10b982]"
-          >
+          <h4 className="inline-block text-2xl font-semibold font-sans leading-tight mb-3 mt-3 transition-all duration-500 hover:text-[#10b982]">
             {title || "Untitled Blog Post"}
           </h4>
           <p className="mb-4 text-gray-600">

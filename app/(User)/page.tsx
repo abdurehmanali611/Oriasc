@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useLayoutEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import AboutContent from "@/components/About";
@@ -13,10 +13,14 @@ import {
   blogs,
   events,
   leader,
+  Partner,
   sermons,
+  Service,
   testimonials,
 } from "@/constants";
 import Link from "next/link";
+import ServicesGrid from "@/components/ServiceGrid";
+import PartnersGrid from "@/components/PartnerGrid";
 
 export default function UserHome() {
   const [dynamicActivities, setDynamicActivities] = useState(activities);
@@ -24,6 +28,7 @@ export default function UserHome() {
   const [dynamicSermons, setDynamicSermons] = useState(sermons);
   const [dynamicBlogs, setDynamicBlogs] = useState(blogs);
   const [dynamicTestimonials, setDynamicTestimonials] = useState(testimonials);
+  const [dynamicServices, setDynamicServices] = useState(Service);
 
   useLayoutEffect(() => {
     setDynamicActivities(activities);
@@ -31,16 +36,18 @@ export default function UserHome() {
     setDynamicSermons(sermons);
     setDynamicBlogs(blogs);
     setDynamicTestimonials(testimonials);
-  }, [activities, events, sermons, blogs, testimonials]); 
+    setDynamicServices(Service);
+  }, [activities, events, sermons, blogs, testimonials, Service]);
 
   const sampleActivities = dynamicActivities.slice(0, 3);
   const sampleEvents = dynamicEvents.slice(0, 3);
   const sampleSermons = dynamicSermons.slice(0, 3);
   const sampleBlogs = dynamicBlogs.slice(0, 3);
   const sampleTestimonials = dynamicTestimonials.slice(0, 3);
+  const sampleServices = dynamicServices.slice(0, 3);
 
   return (
-    <div>
+    <div className="flex flex-col gap-20">
       <Hero title="Home" />
       <AboutContent />
       <div className="relative">
@@ -71,7 +78,20 @@ export default function UserHome() {
         )}
       </div>
 
-      {/* Sermons Section with View All Link */}
+      <div className="relative">
+        <ServicesGrid services={sampleServices} />
+        {dynamicServices.length > 3 && (
+          <div className="text-center pb-8">
+            <Link
+              href="/Services"
+              className="inline-flex items-center justify-center px-6 py-3 bg-[#10b982] text-white font-semibold rounded-lg transition-all duration-500 hover:bg-[#0C1214] hover:text-white"
+            >
+              View All Services
+            </Link>
+          </div>
+        )}
+      </div>
+
       <div className="relative">
         <SermonsGrid sermons={sampleSermons} />
         {dynamicSermons.length > 3 && (
@@ -115,6 +135,7 @@ export default function UserHome() {
           </div>
         )}
       </div>
+        <PartnersGrid partners={Partner} />
     </div>
   );
 }

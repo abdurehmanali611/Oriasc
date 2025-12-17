@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar({ active = "index" }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function Navbar({ active = "index" }) {
     if (pathname === "/Activities") return "activities";
     if (pathname === "/Events") return "events";
     if (pathname === "/Sermons") return "sermons";
-    if (pathname === "/Blog") return "blog";
+    if (pathname === "/News") return "blog";
     if (pathname === "/Team") return "team";
     if (pathname === "/Testimonial") return "testimonial";
     if (pathname === "/Contact") return "contact";
@@ -26,10 +27,10 @@ export default function Navbar({ active = "index" }) {
   const pagesActive = ["Blog", "Team", "Testimonial"].includes(currentActive);
 
   return (
-    <div className="container mx-auto px-4 border-b border-white/50">
-      <nav className="flex items-center justify-between py-3 px-5 bg-linear-to-r from-[#9d5e43] to-[#10b982]">
+    <div className="border-b border-white/50">
+      <nav className="flex items-center justify-between py-3 px-5 bg-[#61CE70]">
         <Link href="/" className="inline-block">
-          <h1 className="mb-0 text-[#10b982] font-bold font-sans text-2xl">
+          <h1 className="mb-0 text-white font-bold font-sans text-2xl">
             ORIASC
           </h1>
         </Link>
@@ -37,26 +38,26 @@ export default function Navbar({ active = "index" }) {
         {/* Mobile menu button - hidden on lg screens and above */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden px-5 py-2.5 border-2 shadow-none bg-[#6C757D] text-[#F8F9FA] border-[#F1C152] focus:outline-none"
+          className="lg:hidden shadow-none bg-black p-2 rounded-lg text-white focus:outline-none cursor-pointer"
           type="button"
           aria-label="Toggle navigation"
         >
-          <span className="fa fa-bars text-2xl"></span>
+          <Menu className={`${mobileMenuOpen ? 'hidden': 'block'}`}/>
+          <X className={`${mobileMenuOpen ? 'block': 'hidden'}`}/>
         </button>
 
-        {/* Navigation menu - hidden on mobile, visible on lg and above */}
         <div
           className={`${
             mobileMenuOpen ? "block" : "hidden"
-          } lg:flex lg:items-center lg:justify-between lg:flex-1 transition-all duration-300 absolute lg:relative top-full left-0 w-full bg-white lg:bg-transparent shadow-lg lg:shadow-none z-50`}
+          } lg:flex lg:items-center lg:justify-between lg:flex-1 transition-all duration-300 absolute lg:relative top-full left-0 w-full bg-[#61CE70] lg:bg-transparent shadow-lg lg:shadow-none z-50`}
         >
-          <div className="flex flex-col lg:flex-row lg:ml-auto lg:mx-auto">
+          <div className="flex flex-row flex-wrap justify-center lg:flex-row lg:ml-auto lg:mx-auto ">
             <Link
               href="/"
               className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
                 currentActive === "index"
-                  ? "text-[#10b982]"
-                  : "text-[#0C1214] hover:text-[#10b982]"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
               }`}
             >
               Home
@@ -66,8 +67,8 @@ export default function Navbar({ active = "index" }) {
               href="/About"
               className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
                 currentActive === "about"
-                  ? "text-[#10b982]"
-                  : "text-[#0C1214] hover:text-[#10b982]"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
               }`}
             >
               About
@@ -77,8 +78,8 @@ export default function Navbar({ active = "index" }) {
               href="/Activities"
               className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
                 currentActive === "activities"
-                  ? "text-[#10b982]"
-                  : "text-[#0C1214] hover:text-[#10b982]"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
               }`}
             >
               Activities
@@ -88,19 +89,41 @@ export default function Navbar({ active = "index" }) {
               href="/Events"
               className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
                 currentActive === "events"
-                  ? "text-[#10b982]"
-                  : "text-[#0C1214] hover:text-[#10b982]"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
               }`}
             >
               Events
             </Link>
 
             <Link
+              href="/Services"
+              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
+                currentActive === "events"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
+              }`}
+            >
+              Services
+            </Link>
+
+            <Link
+              href="/Partners"
+              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
+                currentActive === "events"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
+              }`}
+            >
+              Partners
+            </Link>
+
+            <Link
               href="/Sermons"
               className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
                 currentActive === "sermons"
-                  ? "text-[#10b982]"
-                  : "text-[#0C1214] hover:text-[#10b982]"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
               }`}
             >
               Sermons
@@ -115,8 +138,8 @@ export default function Navbar({ active = "index" }) {
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className={`w-full text-left p-3 text-[17px] font-semibold transition-all duration-500 flex gap-1 items-center ${
                   pagesActive
-                    ? "text-[#10b982]"
-                    : "text-[#0C1214] hover:text-[#10b982]"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
                 } hover:cursor-pointer`}
                 type="button"
               >
@@ -127,37 +150,37 @@ export default function Navbar({ active = "index" }) {
               <div
                 className={`${
                   dropdownOpen ? "block" : "hidden"
-                } lg:absolute lg:top-full lg:left-0 lg:bg-[#F8F9FA] lg:border-0 lg:min-w-[200px] lg:z-50 lg:shadow-lg origin-top transition-all duration-300`}
+                } absolute lg:top-full lg:left-0 bg-black border-0 lg:min-w-[200px] z-50 lg:shadow-lg origin-top transition-all duration-300`}
                 style={{ transformOrigin: "0% 0%" }}
               >
                 <Link
-                  href="/Blog"
+                  href="/News"
                   className={`block px-4 py-2 transition-all duration-500 ${
                     currentActive === "blog"
-                      ? "text-[#10b982] font-semibold"
-                      : "text-[#0C1214] hover:text-[#10b982] hover:bg-gray-50"
+                    ? "text-red-500"
+                    : "text-white hover:text-red-500"
                   }`}
                 >
-                  Latest Blog
+                  Latest News
                 </Link>
 
                 <Link
                   href="/Team"
                   className={`block px-4 py-2 transition-all duration-500 ${
                     currentActive === "team"
-                      ? "text-[#10b982] font-semibold"
-                      : "text-[#0C1214] hover:text-[#10b982] hover:bg-gray-50"
+                    ? "text-red-500"
+                    : "text-white hover:text-red-500"
                   }`}
                 >
-                  Our Team
+                  Our Management
                 </Link>
 
                 <Link
                   href="/Testimonial"
                   className={`block px-4 py-2 transition-all duration-500 ${
                     currentActive === "testimonial"
-                      ? "text-[#10b982] font-semibold"
-                      : "text-[#0C1214] hover:text-[#10b982] hover:bg-gray-50"
+                    ? "text-red-500"
+                    : "text-white hover:text-red-500"
                   }`}
                 >
                   Testimonial
@@ -169,20 +192,13 @@ export default function Navbar({ active = "index" }) {
               href="/Contact"
               className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
                 currentActive === "contact"
-                  ? "text-[#10b982]"
-                  : "text-[#0C1214] hover:text-[#10b982]"
+                  ? "text-red-500"
+                  : "text-white hover:text-red-500"
               }`}
             >
               Contact
             </Link>
           </div>
-
-          <Link
-            href="/Admin"
-            className="block xl:inline-flex items-center justify-center bg-[#001100] text-white py-3 px-4 font-semibold transition-all duration-500 hover:bg-black hover:text-[#10b982] hover:border-[#0C1214] rounded-xl m-3 lg:m-0"
-          >
-            Admin Dashboard
-          </Link>
         </div>
       </nav>
     </div>

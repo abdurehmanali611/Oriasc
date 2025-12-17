@@ -11,6 +11,8 @@ interface cloudinarySuccessResult {
   };
 }
 
+const api = "http://localhost:8000/api"
+
 export async function ContactResponse(
   to: string | string[],
   message: string,
@@ -67,7 +69,7 @@ export async function AuthAdmin(
   try {
     setIsLoading(true);
     const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/login",
+      `${api}/login`,
       values,
       {
         headers: {
@@ -76,12 +78,11 @@ export async function AuthAdmin(
       }
     );
     const data = response.data;
-    if (data) return router.push("/Dashboard");
+    if (data) {
+      localStorage.setItem("Password", values.Password)
+      router.push("/Dashboard");
+    }
     setIsLoading(false);
-    setError("User Not Found");
-    setTimeout(() => {
-      setError(null);
-    }, 2000);
   } catch (error: any) {
     setIsLoading(true);
     console.log(error.message);
@@ -94,28 +95,9 @@ export async function AuthAdmin(
   }
 }
 
-export async function CreateCred(values: any) {
-  try {
-    const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/CredPost",
-      values,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = response.data;
-    return data;
-  } catch (error: any) {
-    console.log(error.message);
-    return;
-  }
-}
-
 export async function CredFetch() {
   try {
-    const response = await axios.get("https://oriasc-backend.vercel.app/api/GetCred", {
+    const response = await axios.get(`${api}/GetCred`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -140,8 +122,8 @@ export async function UpdateCred(values: any) {
 
     console.log("Updating admin with ID:", cred[0].id);
     const response = await axios.patch(
-      `https://oriasc-backend.vercel.app/api/PatchCred/${cred[0].id}`,
-      values,
+      `${api}/PatchCred/${cred[0].id}`,
+      {Password: values.New_Password},
       {
         headers: {
           "Content-Type": "application/json",
@@ -168,7 +150,7 @@ export async function HeroPost(values: any) {
         : undefined,
     };
     const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/HeroPost",
+      `${api}/HeroPost`,
       formattedValues,
       {
         headers: {
@@ -186,7 +168,7 @@ export async function HeroPost(values: any) {
 
 export async function GetHero() {
   try {
-    const response = await axios.get("https://oriasc-backend.vercel.app/api/GetHero", {
+    const response = await axios.get(`${api}/GetHero`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -210,7 +192,7 @@ export async function PatchHero(values: any, id: number) {
         : undefined,
     };
     const response = await axios.patch(
-      `https://oriasc-backend.vercel.app/api/PatchHero/${id}`,
+      `${api}/PatchHero/${id}`,
       formattedValues,
       {
         headers: {
@@ -229,7 +211,7 @@ export async function PatchHero(values: any, id: number) {
 export async function DeleteHero(id: number) {
   try {
     const response = await axios.delete(
-      `https://oriasc-backend.vercel.app/api/DeleteHero/${id}`,
+      `${api}/DeleteHero/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -253,7 +235,7 @@ export async function ActivityPost(values: any) {
         : format(new Date(), "yyyy-MM-dd"),
     };
     const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/ActivityPost",
+      `${api}/ActivityPost`,
       formattedValues,
       {
         headers: {
@@ -271,7 +253,7 @@ export async function ActivityPost(values: any) {
 
 export async function GetActivity() {
   try {
-    const response = await axios.get("https://oriasc-backend.vercel.app/api/GetActivity", {
+    const response = await axios.get(`${api}/GetActivity`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -292,7 +274,7 @@ export async function PatchActivity(values: any, id: number) {
         : format(new Date(), "yyyy-MM-dd"),
     };
     const response = await axios.patch(
-      `https://oriasc-backend.vercel.app/api/PatchActivity/${id}`,
+      `${api}/PatchActivity/${id}`,
       formattedValues,
       {
         headers: {
@@ -311,7 +293,7 @@ export async function PatchActivity(values: any, id: number) {
 export async function DeleteActivity(id: number) {
   try {
     const response = await axios.delete(
-      `https://oriasc-backend.vercel.app/api/DeleteActivity/${id}`,
+      `${api}/DeleteActivity/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -338,7 +320,7 @@ export async function EventPost(values: any) {
         : format(new Date(), "yyyy-MM-dd"),
     };
     const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/EventPost",
+      `${api}/EventPost`,
       featuredEvent,
       {
         headers: {
@@ -356,7 +338,7 @@ export async function EventPost(values: any) {
 
 export async function GetEvent() {
   try {
-    const response = await axios.get("https://oriasc-backend.vercel.app/api/GetEvent", {
+    const response = await axios.get(`${api}/GetEvent`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -380,7 +362,7 @@ export async function PatchEvent(values: any, id: number) {
         : format(new Date(), "yyyy-MM-dd"),
     };
     const response = await axios.patch(
-      `https://oriasc-backend.vercel.app/api/PatchEvent/${id}`,
+      `${api}/PatchEvent/${id}`,
       featuredEvent,
       {
         headers: {
@@ -399,7 +381,7 @@ export async function PatchEvent(values: any, id: number) {
 export async function DeleteEvent(id: number) {
   try {
     const response = await axios.delete(
-      `https://oriasc-backend.vercel.app/api/DeleteEvent/${id}`,
+      `${api}/DeleteEvent/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -417,7 +399,7 @@ export async function DeleteEvent(id: number) {
 export async function BlogPost(values: any) {
   try {
     const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/BlogPost",
+      `${api}/BlogPost`,
       values,
       {
         headers: {
@@ -435,7 +417,7 @@ export async function BlogPost(values: any) {
 
 export async function GetBlog() {
   try {
-    const response = await axios.get("https://oriasc-backend.vercel.app/api/GetBlog", {
+    const response = await axios.get(`${api}/GetBlog`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -450,7 +432,7 @@ export async function GetBlog() {
 export async function PatchBlog(values: any, id: number) {
   try {
     const response = await axios.patch(
-      `https://oriasc-backend.vercel.app/api/PatchBlog/${id}`,
+      `${api}/PatchBlog/${id}`,
       values,
       {
         headers: {
@@ -469,7 +451,7 @@ export async function PatchBlog(values: any, id: number) {
 export async function DeleteBlog(id: number) {
   try {
     const response = await axios.delete(
-      `https://oriasc-backend.vercel.app/api/DeleteBlog/${id}`,
+      `${api}/DeleteBlog/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -487,7 +469,7 @@ export async function DeleteBlog(id: number) {
 export async function SermonPost(values: any) {
   try {
     const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/SermonPost",
+      `${api}/SermonPost`,
       values,
       {
         headers: {
@@ -505,7 +487,7 @@ export async function SermonPost(values: any) {
 
 export async function GetSermon() {
   try {
-    const response = await axios.get("https://oriasc-backend.vercel.app/api/GetSermon", {
+    const response = await axios.get(`${api}/GetSermon`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -520,7 +502,7 @@ export async function GetSermon() {
 export async function PatchSermon(values: any, id: number) {
   try {
     const response = await axios.patch(
-      `https://oriasc-backend.vercel.app/api/PatchSermon/${id}`,
+      `${api}/PatchSermon/${id}`,
       values,
       {
         headers: {
@@ -539,7 +521,7 @@ export async function PatchSermon(values: any, id: number) {
 export async function DeleteSermon(id: number) {
   try {
     const response = await axios.delete(
-      `https://oriasc-backend.vercel.app/api/DeleteSermon/${id}`,
+      `${api}/DeleteSermon/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -557,7 +539,7 @@ export async function DeleteSermon(id: number) {
 export async function TeamPost(values: any) {
   try {
     const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/TeamPost",
+      `${api}/TeamPost`,
       values,
       {
         headers: {
@@ -575,7 +557,7 @@ export async function TeamPost(values: any) {
 
 export async function GetTeam() {
   try {
-    const response = await axios.get("https://oriasc-backend.vercel.app/api/GetTeam", {
+    const response = await axios.get(`${api}/GetTeam`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -590,7 +572,7 @@ export async function GetTeam() {
 export async function PatchTeam(values: any, id: number) {
   try {
     const response = await axios.patch(
-      `https://oriasc-backend.vercel.app/api/PatchTeam/${id}`,
+      `${api}/PatchTeam/${id}`,
       values,
       {
         headers: {
@@ -609,7 +591,7 @@ export async function PatchTeam(values: any, id: number) {
 export async function DeleteTeam(id: number) {
   try {
     const response = await axios.delete(
-      `https://oriasc-backend.vercel.app/api/DeleteTeam/${id}`,
+      `${api}/DeleteTeam/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -627,7 +609,7 @@ export async function DeleteTeam(id: number) {
 export async function TestimonialPost(values: any) {
   try {
     const response = await axios.post(
-      "https://oriasc-backend.vercel.app/api/TestimonialPost",
+      `${api}/TestimonialPost`,
       values,
       {
         headers: {
@@ -646,7 +628,7 @@ export async function TestimonialPost(values: any) {
 export async function GetTestimonial() {
   try {
     const response = await axios.get(
-      "https://oriasc-backend.vercel.app/api/GetTestimonial",
+      `${api}/GetTestimonial`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -663,7 +645,7 @@ export async function GetTestimonial() {
 export async function PatchTestimonial(values: any, id: number) {
   try {
     const response = await axios.patch(
-      `https://oriasc-backend.vercel.app/api/PatchTestimonial/${id}`,
+      `${api}/PatchTestimonial/${id}`,
       values,
       {
         headers: {
@@ -682,7 +664,153 @@ export async function PatchTestimonial(values: any, id: number) {
 export async function DeleteTestimonial(id: number) {
   try {
     const response = await axios.delete(
-      `https://oriasc-backend.vercel.app/api/DeleteTestimonial/${id}`,
+      `${api}/DeleteTestimonial/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
+export async function ServicePost(values: any) {
+  try {
+    const response = await axios.post(
+      `${api}/ServicePost`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
+export async function GetService() {
+  try {
+    const response = await axios.get(
+      `${api}/GetService`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+}
+
+export async function PatchService(values: any, id: number) {
+  try {
+    const response = await axios.patch(
+      `${api}/PatchService/${id}`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
+export async function DeleteService(id: number) {
+  try {
+    const response = await axios.delete(
+      `${api}/DeleteService/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
+export async function PartnerPost(values: any) {
+  try {
+    const response = await axios.post(
+      `${api}/PartnerPost`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
+export async function GetPartner() {
+  try {
+    const response = await axios.get(
+      `${api}/GetPartner`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+}
+
+export async function PatchPartner(values: any, id: number) {
+  try {
+    const response = await axios.patch(
+      `${api}/PatchPartner/${id}`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
+export async function DeletePartner(id: number) {
+  try {
+    const response = await axios.delete(
+      `${api}/DeletePartner/${id}`,
       {
         headers: {
           "Content-Type": "application/json",

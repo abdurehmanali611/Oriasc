@@ -127,8 +127,8 @@ export default function AboutContent({ aboutData }: AboutContentProps) {
 
           {/* Call to Action */}
           <div className="container mx-auto text-center h-56 bg-[#10b982] py-5 flex justify-center">
-            <div className="flex gap-4 items-center">
-              <div className="w-full lg:w-2/12">
+            <div className="flex gap-4 items-center flex-col lg:flex-row justify-between">
+              <div className="w-full lg:w-2/12 lg:block hidden">
                 <Icon icon="noto:mosque" width="128" height="128" />
               </div>
               <div className="w-full lg:w-7/12 text-center lg:text-left">

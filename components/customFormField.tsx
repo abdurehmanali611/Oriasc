@@ -83,6 +83,10 @@ interface BaseProps {
   passKey?: string;
   dialogError?: string | null;
   add?: "allergy" | "symptom";
+  className?: string; // Add className prop
+  inputClassName?: string; // Add inputClassName for custom input styling
+  labelClassName?: string; // Add labelClassName for custom label styling
+  formItemClassName?: string; // Add formItemClassName for custom form item styling
 }
 
 interface FormConnectedProps extends BaseProps {
@@ -159,6 +163,10 @@ const RenderInput = ({ field, props }: { field: any; props: customProps }) => {
                     e.currentTarget.value = "";
                   }
                 }}
+                className={clsx(props.inputClassName, {
+                  "h-12 px-4 rounded-xl border-2 border-gray-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-200": 
+                    !props.inputClassName && !props.add,
+                })}
               />
               {props.add && (
                 <div className="flex flex-col flex-wrap gap-2 max-h-24 overflow-y-auto p-2 border rounded-md">
@@ -200,7 +208,7 @@ const RenderInput = ({ field, props }: { field: any; props: customProps }) => {
           <Textarea
             placeholder={props.placeholder}
             {...field}
-            className="w-80 h-36 ml-4"
+            className={clsx("w-80 h-36 ml-4", props.inputClassName)}
           />
         </FormControl>
       );
@@ -211,7 +219,10 @@ const RenderInput = ({ field, props }: { field: any; props: customProps }) => {
           <PopoverTrigger asChild>
             <Button
               variant="outline"
-              className="w-fit justify-between ml-6 font-normal cursor-pointer"
+              className={clsx(
+                "w-fit justify-between ml-6 font-normal cursor-pointer",
+                props.inputClassName
+              )}
             >
               <Calendar1 className="mr-2 h-4 w-4" />
               {field.value ? field.value.toDateString() : "Select Date"}
@@ -238,7 +249,7 @@ const RenderInput = ({ field, props }: { field: any; props: customProps }) => {
     case formFieldTypes.RADIO_BUTTON:
       return (
         <RadioGroup
-          className="flex gap-6 h-11"
+          className={clsx("flex gap-6 h-11", props.inputClassName)}
           onValueChange={(item) => {
             field.onChange(item);
             if (props.reason) {
@@ -267,11 +278,13 @@ const RenderInput = ({ field, props }: { field: any; props: customProps }) => {
       return (
         <Select value={field.value} onValueChange={field.onChange}>
           <SelectTrigger
-            className={
-              props.isDoctorList
-                ? "w-full p-3 cursor-pointer"
-                : "w-[300px] cursor-pointer"
-            }
+            className={clsx(
+              {
+                "w-full p-3 cursor-pointer": props.isDoctorList,
+                "w-[300px] cursor-pointer": !props.isDoctorList,
+              },
+              props.inputClassName
+            )}
           >
             <SelectValue placeholder={props.placeholder} />
           </SelectTrigger>
@@ -345,7 +358,10 @@ const RenderInput = ({ field, props }: { field: any; props: customProps }) => {
                   type="button"
                   onClick={() => open()}
                   variant="outline"
-                  className="flex items-center gap-2 cursor-pointer"
+                  className={clsx(
+                    "flex items-center gap-2 cursor-pointer",
+                    props.inputClassName
+                  )}
                 >
                   <Upload className="w-4 h-4" />
                   {props.previewUrl ? "Change File" : "Choose File"}
@@ -496,13 +512,25 @@ const CustomFormField = (props: customProps) => {
       name={name}
       render={({ field }) => (
         <FormItem
-          className={
-            props.fieldType === formFieldTypes.IMAGE_UPLOADER
-              ? "flex flex-col items-center gap-3"
-              : "flex flex-col gap-3"
-          }
+          className={clsx(
+            props.formItemClassName,
+            {
+              "flex flex-col items-center gap-3":
+                props.fieldType === formFieldTypes.IMAGE_UPLOADER,
+              "flex flex-col gap-3": !props.formItemClassName,
+            }
+          )}
         >
-          {label && <FormLabel className="text-foreground!">{label}</FormLabel>}
+          {label && (
+            <FormLabel 
+              className={clsx(
+                "text-foreground!",
+                props.labelClassName
+              )}
+            >
+              {label}
+            </FormLabel>
+          )}
           <RenderInput field={field} props={props} />
           <FormMessage />
         </FormItem>

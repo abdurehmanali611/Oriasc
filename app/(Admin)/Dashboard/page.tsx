@@ -11,7 +11,6 @@ import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -24,9 +23,8 @@ import {
 } from "@/components/ui/sidebar";
 import { AbsoluteAdminList } from "@/constants";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import AdminDashboardElement from "@/components/AdminDashboardElement";
 import AdminHero from "@/components/AdminHero";
 import AdminActivities from "@/components/AdminActivities";
@@ -36,10 +34,13 @@ import AdminSermons from "@/components/AdminSermons";
 import AdminTeam from "@/components/AdminTeam";
 import AdminTestimonial from "@/components/AdminTestimonial";
 import AdminContacts from "@/components/AdminContacts";
+import AdminServices from "@/components/AdminServices";
+import AdminPartners from "@/components/AdminPartners";
+import AdminChangePassword from "@/components/AdminChangePassword";
 
 export default function AdminDashboard() {
   const [link, setLink] = useState<string>("Dashboard");
-  const router = useRouter();
+
   return (
     <div>
       <SidebarProvider>
@@ -116,7 +117,11 @@ export default function AdminDashboard() {
             <AdminActivities />
           ) : link === "Events" ? (
             <AdminEvents />
-          ) : link === "Blogs" ? (
+          ) : link === "Services" ? (
+            <AdminServices />
+          ) : link === "Partners" ? (
+            <AdminPartners />
+          ) : link === "News" ? (
             <AdminBlogs />
           ) : link === "Sermons" ? (
             <AdminSermons />
@@ -124,6 +129,8 @@ export default function AdminDashboard() {
             <AdminTeam />
           ) : link === "Contact" ? (
             <AdminContacts />
+          ) : link === "Change Password" ? (
+            <AdminChangePassword />
           ) : (
             link === "Testimonial" && <AdminTestimonial />
           )}

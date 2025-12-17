@@ -20,7 +20,6 @@ export default function ActivitiesGrid({ activities }: ActivitiesGridProps) {
         <div className="container mx-auto py-5">
           <SectionHeader
             subtitle="Activities"
-            title="Here Are Our Activities"
           />
 
           {activities && activities.length > 0 ? (

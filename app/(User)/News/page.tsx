@@ -3,7 +3,7 @@ import BlogGrid from "@/components/BlogGrid";
 import { blogs } from "@/constants";
 import { useLayoutEffect, useState } from "react";
 
-export default function Blog() {
+export default function News() {
     const [dynamicBlogs, setDynamicBlogs] = useState(blogs)
     useLayoutEffect(() => {
         setDynamicBlogs(blogs)

@@ -56,7 +56,6 @@ const AdminBlogs = () => {
     },
   });
 
-  // Fetch data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -65,7 +64,6 @@ const AdminBlogs = () => {
 
         const data = await GetBlog();
 
-        // Handle null/undefined responses
         if (data === null || data === undefined) {
           console.warn("API returned null/undefined, treating as empty array");
           setBlogList([]);
@@ -77,8 +75,8 @@ const AdminBlogs = () => {
           setBlogList([]);
         }
       } catch (err: any) {
-        console.error("Failed to fetch blogs:", err);
-        setError(err.message || "Failed to load blogs. Please try again.");
+        console.error("Failed to fetch News:", err);
+        setError(err.message || "Failed to load News. Please try again.");
         setBlogList([]);
       } finally {
         setIsLoading(false);
@@ -103,13 +101,13 @@ const AdminBlogs = () => {
         )
       );
 
-      toast.success("Blog updated successfully!");
+      toast.success("News updated successfully!");
       setIsEditing(false);
       setEditingItem(null);
     } else {
       await BlogPost(values);
 
-      toast.success("Blog posted successfully!");
+      toast.success("News posted successfully!");
       setBlogList((prev: any) => [
         { ...values, id: Date.now(), createdAt: new Date().toISOString() },
         ...prev,
@@ -124,9 +122,9 @@ const AdminBlogs = () => {
     try {
       await DeleteBlog(id);
       setBlogList((prev: any) => prev.filter((item: any) => item.id !== id));
-      toast.success("Blog deleted successfully!");
+      toast.success("News deleted successfully!");
     } catch (error) {
-      toast.error("Failed to delete blog");
+      toast.error("Failed to delete News");
     }
   };
 
@@ -181,12 +179,12 @@ const AdminBlogs = () => {
           <Card className="w-full max-w-4xl shadow-xl rounded-2xl border-2 border-[#10b982]/20">
             <CardHeader className="border-b pb-4 border-[#10b982]/50">
               <CardTitle className="text-3xl font-serif text-[#10b982]">
-                {isEditing ? "Edit Blog Post" : "Blog Creation Form"}
+                {isEditing ? "Edit News Post" : "News Creation Form"}
               </CardTitle>
               <CardDescription className="text-gray-600">
                 {isEditing
-                  ? "Update the blog post details below"
-                  : "Enter details to create a new blog post."}
+                  ? "Update the News post details below"
+                  : "Enter details to create a new News post."}
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-6">
@@ -201,14 +199,14 @@ const AdminBlogs = () => {
                       control={form.control}
                       fieldType={formFieldTypes.INPUT}
                       label="Title"
-                      placeholder="Blog Title"
+                      placeholder="News Title"
                     />
                     <CustomFormField
                       name="Slug"
                       control={form.control}
                       fieldType={formFieldTypes.INPUT}
                       label="Slug/Objective"
-                      placeholder="Blog Slug"
+                      placeholder="News Slug"
                     />
                   </div>
                   <div className="grid md:grid-cols-2 gap-5 items-start">
@@ -217,14 +215,14 @@ const AdminBlogs = () => {
                       control={form.control}
                       fieldType={formFieldTypes.TEXTAREA}
                       label="Description"
-                      placeholder="Blog Description"
+                      placeholder="News Description"
                     />
                     <CustomFormField
                       name="ImageUrl"
                       control={form.control}
                       fieldType={formFieldTypes.IMAGE_UPLOADER}
                       label="Select Image"
-                      placeholder="Blog Image"
+                      placeholder="News Image"
                       previewUrl={previewUrl}
                       handleCloudinary={(result) =>
                         handleCloudinary(
@@ -241,14 +239,14 @@ const AdminBlogs = () => {
                     control={form.control}
                     fieldType={formFieldTypes.INPUT}
                     label="Author"
-                    placeholder="Blog Author"
+                    placeholder="News Author"
                   />
                   <div className="flex gap-3">
                     <Button
                       type="submit"
                       className="bg-[#10b982] hover:bg-green-700 transition duration-300 mt-4 flex-1"
                     >
-                      {isEditing ? "Update Blog Post" : "Submit Blog Post"}
+                      {isEditing ? "Update News Post" : "Submit News Post"}
                     </Button>
                     {isEditing && (
                       <Button
@@ -293,9 +291,9 @@ const AdminBlogs = () => {
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
-                        <AlertDialogTitle>Delete Blog</AlertDialogTitle>
+                        <AlertDialogTitle>Delete News</AlertDialogTitle>
                         <AlertDialogDescription>
-                          Are you sure you want to delete this blog post? This
+                          Are you sure you want to delete this News post? This
                           action cannot be undone.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
