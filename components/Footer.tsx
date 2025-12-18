@@ -55,12 +55,11 @@ export default function Footer() {
                       <MapPinIcon
                         className={`${accentBg} text-white p-2 rounded-full w-9 h-9 shrink-0`}
                       />
-                      <Link
-                        href="#"
+                      <p
                         className={`text-gray-400 transition-colors duration-300 hover:${accentColor} text-base`}
                       >
                         123 Street, New York, USA
-                      </Link>
+                      </p>
                     </div>
                   </div>
 
@@ -73,12 +72,11 @@ export default function Footer() {
                       <PhoneCall
                         className={`${accentBg} text-white p-2 rounded-full w-9 h-9 shrink-0`}
                       />
-                      <Link
-                        href="tel:+251 91 315 5694"
+                      <p
                         className={`text-gray-400 transition-colors duration-300 hover:${accentColor} text-base`}
                       >
                         +251 91 315 5694
-                      </Link>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -122,7 +120,7 @@ export default function Footer() {
                   </Link>
                   <Link
                     className={`text-gray-400 mb-3 transition-colors duration-300 hover:${accentColor} flex gap-3 items-center text-base`}
-                    href="/Blog"
+                    href="/News"
                   >
                     <Check className={`${accentColor} w-4 h-4 shrink-0`} />
                     Our News

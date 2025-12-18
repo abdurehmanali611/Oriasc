@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
@@ -24,110 +24,54 @@ export default function Navbar({ active = "index" }) {
   };
 
   const currentActive = getActiveState();
-  const pagesActive = ["Blog", "Team", "Testimonial"].includes(currentActive);
+  const pagesActive = ["blog", "team", "testimonial"].includes(currentActive);
 
   return (
-    <div className="border-b border-white/50">
-      <nav className="flex items-center justify-between py-3 px-5 bg-[#61CE70]">
-        <Link href="/" className="inline-block">
-          <h1 className="mb-0 text-white font-bold font-sans text-2xl">
-            ORIASC
-          </h1>
-        </Link>
+    <header className="border-b border-white/50 bg-[#61CE70] top-0 z-100">
+      <nav className="flex items-center justify-between py-3 px-5 relative lg:mr-64">
+        <div className="shrink-0 lg:w-1/4">
+          <Link href="/" className="inline-block">
+            <h1 className="mb-0 text-white font-bold font-sans text-2xl">
+              ORIASC
+            </h1>
+          </Link>
+        </div>
 
-        {/* Mobile menu button - hidden on lg screens and above */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden shadow-none bg-black p-2 rounded-lg text-white focus:outline-none cursor-pointer"
+          className="lg:hidden shadow-none bg-black p-2 rounded-lg text-white focus:outline-none cursor-pointer z-50"
           type="button"
-          aria-label="Toggle navigation"
         >
-          <Menu className={`${mobileMenuOpen ? 'hidden': 'block'}`}/>
-          <X className={`${mobileMenuOpen ? 'block': 'hidden'}`}/>
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
         <div
           className={`${
-            mobileMenuOpen ? "block" : "hidden"
-          } lg:flex lg:items-center lg:justify-between lg:flex-1 transition-all duration-300 absolute lg:relative top-full left-0 w-full bg-[#61CE70] lg:bg-transparent shadow-lg lg:shadow-none z-50 max-h-[80vh] overflow-y-auto no-scrollbar`}
+            mobileMenuOpen ? "flex" : "hidden"
+          } lg:flex absolute lg:relative top-full left-0 w-full lg:w-auto bg-[#61CE70] lg:bg-transparent flex-col lg:flex-row items-center justify-center lg:grow z-40`}
         >
-          <div className="flex flex-col gap-0 lg:flex-row lg:ml-auto lg:mx-auto">
-            <Link
-              href="/"
-              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
-                currentActive === "index"
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-              }`}
-            >
+          <div className="flex flex-wrap lg:flex-nowrap justify-center items-center gap-1 lg:gap-2 px-4 py-4 lg:py-0">
+            <NavLink href="/" active={currentActive === "index"}>
               Home
-            </Link>
-
-            <Link
-              href="/About"
-              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
-                currentActive === "about"
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-              }`}
-            >
+            </NavLink>
+            <NavLink href="/About" active={currentActive === "about"}>
               About
-            </Link>
-
-            <Link
-              href="/Activities"
-              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
-                currentActive === "activities"
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-              }`}
-            >
+            </NavLink>
+            <NavLink href="/Activities" active={currentActive === "activities"}>
               Activities
-            </Link>
-
-            <Link
-              href="/Events"
-              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
-                currentActive === "events"
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-              }`}
-            >
+            </NavLink>
+            <NavLink href="/Events" active={currentActive === "events"}>
               Events
-            </Link>
-
-            <Link
-              href="/Services"
-              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
-                currentActive === "events"
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-              }`}
-            >
+            </NavLink>
+            <NavLink href="/Services" active={currentActive === "events"}>
               Services
-            </Link>
-
-            <Link
-              href="/Partners"
-              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
-                currentActive === "events"
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-              }`}
-            >
+            </NavLink>
+            <NavLink href="/Partners" active={currentActive === "events"}>
               Partners
-            </Link>
-
-            <Link
-              href="/Sermons"
-              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
-                currentActive === "sermons"
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-              }`}
-            >
+            </NavLink>
+            <NavLink href="/Sermons" active={currentActive === "sermons"}>
               Sermons
-            </Link>
+            </NavLink>
 
             <div
               className="relative"
@@ -135,72 +79,84 @@ export default function Navbar({ active = "index" }) {
               onMouseLeave={() => setDropdownOpen(false)}
             >
               <button
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                className={`w-full text-left p-3 text-[17px] font-semibold transition-all duration-500 flex gap-1 items-center ${
-                  pagesActive
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-                } hover:cursor-pointer`}
-                type="button"
+                className={`flex items-center gap-1 p-3 text-[17px] font-semibold transition-all ${
+                  pagesActive ? "text-red-500" : "text-white hover:text-red-500"
+                } cursor-pointer`}
               >
                 Pages
-                <Icon icon="gridicons:dropdown" width="24" height="24" />
+                <Icon icon="gridicons:dropdown" width="20" height="20" />
               </button>
 
               <div
                 className={`${
                   dropdownOpen ? "block" : "hidden"
-                } absolute lg:top-full lg:left-0 bg-black border-0 lg:min-w-[200px] z-50 lg:shadow-lg origin-top transition-all duration-300`}
-                style={{ transformOrigin: "0% 0%" }}
+                } absolute left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-0 mt-0 w-48 bg-black shadow-2xl z-110`}
               >
-                <Link
-                  href="/News"
-                  className={`block px-4 py-2 transition-all duration-500 ${
-                    currentActive === "blog"
-                    ? "text-red-500"
-                    : "text-white hover:text-red-500"
-                  }`}
-                >
+                <DropdownLink href="/News" active={currentActive === "blog"}>
                   Latest News
-                </Link>
-
-                <Link
-                  href="/Team"
-                  className={`block px-4 py-2 transition-all duration-500 ${
-                    currentActive === "team"
-                    ? "text-red-500"
-                    : "text-white hover:text-red-500"
-                  }`}
-                >
+                </DropdownLink>
+                <DropdownLink href="/Team" active={currentActive === "team"}>
                   Our Management
-                </Link>
-
-                <Link
+                </DropdownLink>
+                <DropdownLink
                   href="/Testimonial"
-                  className={`block px-4 py-2 transition-all duration-500 ${
-                    currentActive === "testimonial"
-                    ? "text-red-500"
-                    : "text-white hover:text-red-500"
-                  }`}
+                  active={currentActive === "testimonial"}
                 >
                   Testimonial
-                </Link>
+                </DropdownLink>
               </div>
             </div>
 
-            <Link
-              href="/Contact"
-              className={`block p-3 text-[17px] font-semibold transition-all duration-500 ${
-                currentActive === "contact"
-                  ? "text-red-500"
-                  : "text-white hover:text-red-500"
-              }`}
-            >
+            <NavLink href="/Contact" active={currentActive === "contact"}>
               Contact
-            </Link>
+            </NavLink>
           </div>
         </div>
       </nav>
-    </div>
+    </header>
+  );
+}
+
+function NavLink({
+  href,
+  active,
+  children,
+}: {
+  href: string;
+  active: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`p-3 text-[16px] xl:text-[17px] font-semibold whitespace-nowrap transition-all ${
+        active ? "text-red-500" : "text-white hover:text-red-500"
+      }`}
+    >
+      {children}
+    </Link>
+  );
+}
+
+function DropdownLink({
+  href,
+  active,
+  children,
+}: {
+  href: string;
+  active: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`block px-5 py-3 text-sm font-medium transition-all ${
+        active
+          ? "text-red-500"
+          : "text-white hover:bg-zinc-900 hover:text-red-500"
+      }`}
+    >
+      {children}
+    </Link>
   );
 }

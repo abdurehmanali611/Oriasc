@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 const Header = () => {
   return (
-    <div className="w-full fixed top-0 z-50 transition-all duration-500">
+    <div className="w-full top-0 z-50 transition-all duration-500">
       <div className="container mx-auto hidden lg:block">
         <div className="h-[45px] px-[15px] py-2.5 bg-white/50">
           <div className="flex flex-wrap">
@@ -31,7 +31,9 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <Navbar />
+      <div className="fixed w-full z-50 top-0 lg:top-12">
+        <Navbar />
+      </div>
     </div>
   );
 };
