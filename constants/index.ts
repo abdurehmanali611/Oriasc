@@ -146,6 +146,36 @@ const dummyPartners = [
   }
 ]
 
+const dummyBranches = [
+  {
+    id: 1,
+    Name: "An-Noor Community Center",
+    City: "Los Angeles, CA",
+    Contact: "(555) 123-4667",
+    Category: "Regional",
+    Latitude: 10.1203,
+    Longitude: 39.0321
+  },
+  {
+    id: 2,
+    Name: "Al-Falah Islamic Center",
+    City: "Toronto, ON",
+    Contact: "987-6543",
+    Category: "Zonal",
+    Latitude: 11.0213,
+    Longitude: 40.2108
+  },
+  {
+    id: 3,
+    Name: "Ihsan Institute, UK",
+    City: "London",
+    Contact: "+44 20 7XXX XXX",
+    Category: "Woreda",
+    Latitude: 12.2314,
+    Longitude: 41.2310
+  }
+];
+
 const fetchedActivities = await GetActivity();
 const fetchedHero = await GetHero();
 const fetchedBlogs = await GetBlog();
@@ -188,6 +218,8 @@ export const testimonials =
     ? fetchedTestimonials
     : dummyTestimonials;
 
+export const Branches = dummyBranches;
+
 export const AbsoluteAdminList = [
   {
     id: 1,
@@ -221,31 +253,36 @@ export const AbsoluteAdminList = [
   },
   {
     id: 7,
+    name: "Branches",
+    icon: "streamline-ultimate-color:building-2",
+  },
+  {
+    id: 8,
     name: "News",
     icon: "streamline-ultimate-color:blogger-logo",
   },
   {
-    id: 8,
+    id: 9,
     name: "Sermons",
     icon: "catppuccin:video",
   },
   {
-    id: 9,
+    id: 10,
     name: "Team",
     icon: "fluent-color:people-team-16",
   },
   {
-    id: 10,
+    id: 11,
     name: "Testimonial",
     icon: "dashicons:testimonial",
   },
   {
-    id: 11,
+    id: 12,
     name: "Contact",
     icon: "streamline-ultimate-color:messages-logo",
   },
   {
-    id: 12,
+    id: 13,
     name: "Change Password",
     icon: "fluent-color:person-key-20",
   },
@@ -302,5 +339,20 @@ export const partnerTypes = [
   {
     id: 4,
     name: "Community Partner"
+  }
+]
+
+export const AreaCategory = [
+  {
+    id: 1,
+    name: "Regional"
+  },
+  {
+    id: 2,
+    name: "Zonal"
+  },
+  {
+    id: 3,
+    name: "Woreda"
   }
 ]

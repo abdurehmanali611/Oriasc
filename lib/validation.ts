@@ -103,3 +103,12 @@ export const PasswordChangeValidation = z.object({
   New_Password: z.string().min(6, "Please Enter Your new Password"),
   Confirm_Password: z.string().min(6, "Please Confirm Your new Password")
 })
+
+export const areaValidation = z.object({
+  Name: z.string().min(2, "Please Enter area name"),
+  City: z.string().min(2, "Please Enter the City"),
+  Contact: z.string().min(2, "Please Enter Institution contact"),
+  Category: z.string().min(2, "Please Select category of Institution"),
+  Latitude: z.string().min(2, "Please Enter the latitude of Institution"),
+  Longitude: z.string().min(2, "Please Enter the longitude of Institution")
+})

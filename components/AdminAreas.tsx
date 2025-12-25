@@ -1,9 +1,12 @@
 "use client";
-import { PartnerValidation } from "@/lib/validation";
+import { AreaPost, DeleteArea, GetArea, PatchArea } from "@/lib/actions";
+import { areaValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
-import { Form } from "./ui/form";
+import { Button } from "./ui/button";
 import {
   Card,
   CardContent,
@@ -11,17 +14,9 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { Form } from "./ui/form";
 import CustomFormField, { formFieldTypes } from "./customFormField";
-import { Button } from "./ui/button";
-import {
-  GetPartner,
-  PatchPartner,
-  PartnerPost,
-  handleCloudinary,
-  DeletePartner,
-} from "@/lib/actions";
-import { useState, useEffect } from "react";
-import { toast } from "sonner";
+import { AreaCategory } from "@/constants";
 import { SquarePen, Trash2 } from "lucide-react";
 import {
   AlertDialog,
@@ -34,23 +29,23 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { partnerTypes } from "@/constants";
-import Image from "next/image";
 
-const AdminPartners = () => {
-  const [partnerList, setPartnerList] = useState<any[]>([]);
+const AdminAreas = () => {
+  const [areaList, setAreaList] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [editingItem, setEditingItem] = useState<any>(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  const form = useForm<z.infer<typeof PartnerValidation>>({
-    resolver: zodResolver(PartnerValidation),
+  const form = useForm<z.infer<typeof areaValidation>>({
+    resolver: zodResolver(areaValidation) as any,
     defaultValues: {
-      Title: "",
-      Type: "",
-      logoUrl: "",
+      Name: "",
+      City: "",
+      Contact: "",
+      Category: "",
+      Latitude: "9.0192",
+      Longitude: "38.7525",
     },
   });
 
@@ -60,22 +55,22 @@ const AdminPartners = () => {
         setIsLoading(true);
         setError(null);
 
-        const data = await GetPartner();
+        const data = await GetArea();
 
         if (data === null || data === undefined) {
           console.warn("API returned null/undefined, treating as empty array");
-          setPartnerList([]);
+          setAreaList([]);
         } else if (Array.isArray(data)) {
-          setPartnerList(data);
+          setAreaList(data);
         } else {
           console.error("API returned non-array data:", data);
           setError("Received invalid data format");
-          setPartnerList([]);
+          setAreaList([]);
         }
       } catch (err: any) {
-        console.error("Failed to fetch Partners:", err);
-        setError(err.message || "Failed to load Partners. Please try again.");
-        setPartnerList([]);
+        console.error("Failed to fetch Areas:", err);
+        setError(err.message || "Failed to load Areas. Please try again.");
+        setAreaList([]);
       } finally {
         setIsLoading(false);
       }
@@ -84,35 +79,35 @@ const AdminPartners = () => {
     fetchData();
   }, []);
 
-  const handlePost = async (values: z.infer<typeof PartnerValidation>) => {
+  const handlePost = async (values: z.infer<typeof areaValidation>) => {
     if (isEditing && editingItem) {
-      await PatchPartner(values, editingItem.id);
+      await PatchArea(values, editingItem.id);
 
       const updatedItem = {
         ...editingItem,
         ...values,
       };
 
-      setPartnerList((prev: any) =>
+      setAreaList((prev: any) =>
         prev.map((item: any) =>
           item.id === editingItem.id ? updatedItem : item
         )
       );
 
-      toast.success("Partner updated successfully!");
+      toast.success("Area updated successfully!");
       setIsEditing(false);
       setEditingItem(null);
     } else {
-      await PartnerPost(values);
+      await AreaPost(values);
 
-      const newPartnerItem = {
+      const newAreaItem = {
         ...values,
         id: Date.now(),
         createdAt: new Date().toISOString(),
       };
 
-      toast.success("Partner posted successfully!");
-      setPartnerList((prev: any) => [newPartnerItem, ...prev]);
+      toast.success("Areas posted successfully!");
+      setAreaList((prev: any) => [newAreaItem, ...prev]);
     }
 
     form.reset();
@@ -120,11 +115,11 @@ const AdminPartners = () => {
 
   const handleDelete = async (id: any) => {
     try {
-      await DeletePartner(id);
-      setPartnerList((prev: any) => prev.filter((item: any) => item.id !== id));
-      toast.success("Partner deleted successfully!");
+      await DeleteArea(id);
+      setAreaList((prev: any) => prev.filter((item: any) => item.id !== id));
+      toast.success("Area deleted successfully!");
     } catch (error) {
-      toast.error("Failed to delete Partner");
+      toast.error("Failed to delete Area");
     }
   };
 
@@ -133,9 +128,12 @@ const AdminPartners = () => {
     setEditingItem(item);
 
     form.reset({
-      Title: item.Title,
-      Type: item.Type,
-      logoUrl: item.logoUrl,
+      Name: item.Name,
+      City: item.City,
+      Category: item.Category,
+      Contact: item.Contact,
+      Latitude: item.Latitude,
+      Longitude: item.Longitude,
     });
 
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -147,7 +145,6 @@ const AdminPartners = () => {
     form.reset();
   };
 
-  // Loading state
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-neutral-50">
@@ -156,7 +153,6 @@ const AdminPartners = () => {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen gap-4 bg-neutral-50">
@@ -179,12 +175,12 @@ const AdminPartners = () => {
       <Card className="w-full max-w-4xl shadow-xl rounded-2xl border-2 border-[#10b982]/20">
         <CardHeader className="border-b pb-4 border-[#10b982]/50">
           <CardTitle className="text-3xl font-serif text-[#10b982]">
-            {isEditing ? "Edit partner" : "Partner Creation"}
+            {isEditing ? "Edit Area" : "Area Creation"}
           </CardTitle>
           <CardDescription className="text-gray-600">
             {isEditing
-              ? "Update the partner details below"
-              : "Create entries for key organizational partners."}
+              ? "Update the Area details below"
+              : "Create entries for key organizational Area."}
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-6">
@@ -193,34 +189,56 @@ const AdminPartners = () => {
               onSubmit={form.handleSubmit(handlePost)}
               className="flex flex-col gap-6"
             >
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="flex items-center justify-between">
                 <CustomFormField
-                  name="Title"
+                  name="Name"
                   control={form.control}
                   fieldType={formFieldTypes.INPUT}
-                  label="Title"
-                  placeholder="partner name"
+                  label="Name:"
+                  placeholder="area name"
+                  inputClassName="h-fit p-2 w-full"
                 />
                 <CustomFormField
-                  name="Type"
+                  name="Category"
                   control={form.control}
                   fieldType={formFieldTypes.SELECT}
-                  label="Type: "
-                  placeholder="partner type"
-                  listdisplay={partnerTypes}
+                  label="Category:"
+                  placeholder="area category"
+                  listdisplay={AreaCategory}
+                />
+                <CustomFormField
+                  name="City"
+                  control={form.control}
+                  fieldType={formFieldTypes.INPUT}
+                  label="City: "
+                  placeholder="city name"
+                  inputClassName="h-fit p-2 w-full"
                 />
               </div>
-              <div className="flex justify-center">
+              <div className="flex items-center justify-between">
                 <CustomFormField
-                  name="logoUrl"
+                  name="Contact"
                   control={form.control}
-                  fieldType={formFieldTypes.IMAGE_UPLOADER}
-                  label="Company Logo"
-                  handleCloudinary={(result) =>
-                    handleCloudinary(result, form, setPreviewUrl, "logoUrl")
-                  }
-                  previewUrl={previewUrl}
-                  placeholder="Select Image"
+                  fieldType={formFieldTypes.PHONE_INPUT}
+                  label="Contact: "
+                  placeholder="contact of area"
+                  inputClassName="h-fit p-2 w-full"
+                />
+                <CustomFormField
+                  name="Latitude"
+                  control={form.control}
+                  fieldType={formFieldTypes.INPUT}
+                  label="Latitude:"
+                  placeholder="location Latitude"
+                  inputClassName="h-fit p-2 w-full"
+                />
+                <CustomFormField
+                  name="Longitude"
+                  control={form.control}
+                  fieldType={formFieldTypes.INPUT}
+                  label="Longitude: "
+                  placeholder="Location Longitude"
+                  inputClassName="h-fit p-2 w-full"
                 />
               </div>
               <div className="flex gap-3">
@@ -228,7 +246,7 @@ const AdminPartners = () => {
                   type="submit"
                   className="bg-[#10b982] hover:bg-green-700 transition duration-300 mt-4 flex-1"
                 >
-                  {isEditing ? "Update Partner" : "Submit Partner"}
+                  {isEditing ? "Update Area" : "Submit Area"}
                 </Button>
                 {isEditing && (
                   <Button
@@ -246,7 +264,7 @@ const AdminPartners = () => {
         </CardContent>
       </Card>
       <div className="flex flex-wrap justify-center gap-8 w-full max-w-7xl">
-        {partnerList.map((item: any, idx: number) => (
+        {areaList.map((item: any, idx: number) => (
           <Card
             key={idx}
             className="w-full sm:w-72 shadow-md hover:shadow-xl transition duration-300 rounded-2xl overflow-hidden relative"
@@ -272,9 +290,9 @@ const AdminPartners = () => {
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Delete Partner</AlertDialogTitle>
+                    <AlertDialogTitle>Delete Area</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Are you sure you want to delete this partner? This action
+                      Are you sure you want to delete this area? This action
                       cannot be undone.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
@@ -292,18 +310,28 @@ const AdminPartners = () => {
             </div>
             <CardHeader className="bg-[#10b982]/10 border-b border-[#10b982]/30">
               <CardTitle className="text-xl font-serif text-[#10b982]">
-                {item.Title}: {item.Type}
+                {item.Name}: {item.City}, Ethiopia
               </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-5 p-4">
-              <Image 
-              src={item.logoUrl}
-              alt={item.Title}
-              width={150}
-              height={150}
-              loading="eager"
-              className="rounded-xl"
-              />
+              <div className="grid grid-cols-2 gap-5">
+                <div className="flex flex-col gap-3 items-center">
+                  <h3 className="font-bold text-xl text-red-600">Category</h3>
+                  <p>{item.Category}</p>
+                </div>
+                <div className="flex flex-col gap-3 items-center">
+                  <h3 className="text-red-600 font-bold text-xl">Contact</h3>
+                  <p>{item.Contact}</p>
+                </div>
+                <div className="flex flex-col gap-3 items-center">
+                  <h3 className="text-red-600 font-bold text-xl">Latitude</h3>
+                  <p>{item.Latitude}</p>
+                </div>
+                <div className="flex flex-col gap-3 items-center">
+                  <h3 className="text-red-600 font-bold text-xl">Longitude</h3>
+                  <p>{item.Longitude}</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         ))}
@@ -312,4 +340,4 @@ const AdminPartners = () => {
   );
 };
 
-export default AdminPartners;
+export default AdminAreas;

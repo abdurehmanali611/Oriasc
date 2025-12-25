@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\BranchesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\HeroSectionController;
@@ -55,6 +56,10 @@ Route::post("/PartnerPost", [PartnerController::class, "CreatePartner"]);
 Route::get("/GetPartner", [PartnerController::class, "PartnerFetch"]);
 Route::patch("/PatchPartner/{id}", [PartnerController::class, "UpdatePartner"]);
 Route::delete("/DeletePartner/{id}", [PartnerController::class, "DeletePartner"]);
+Route::post("/AreaPost", [BranchesController::class, "CreateArea"]);
+Route::get("/GetArea", [BranchesController::class, "AreaFetch"]);
+Route::patch("/PatchArea/{id}", [BranchesController::class, "UpdateArea"]);
+Route::delete("/DeleteArea/{id}", [BranchesController::class, "DeleteArea"]);
 
 // Contact form routes
 Route::get('/contacts', [ContactController::class, 'index']);

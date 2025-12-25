@@ -1,5 +1,6 @@
 "use client"
 import AboutContent from "@/components/About";
+import BranchFinder from "@/components/BranchFinder";
 import TeamSection from "@/components/TeamSection";
 import { leader } from "@/constants";
 import { useLayoutEffect, useState } from "react";
@@ -12,5 +13,6 @@ export default function About() {
     return <div className="py-5">
         <AboutContent />
         <TeamSection leader={dynamicTeam}/>
+        <BranchFinder />
     </div>
 }

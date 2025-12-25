@@ -37,6 +37,7 @@ import AdminContacts from "@/components/AdminContacts";
 import AdminServices from "@/components/AdminServices";
 import AdminPartners from "@/components/AdminPartners";
 import AdminChangePassword from "@/components/AdminChangePassword";
+import AdminAreas from "@/components/AdminAreas";
 
 export default function AdminDashboard() {
   const [link, setLink] = useState<string>("Dashboard");
@@ -121,6 +122,8 @@ export default function AdminDashboard() {
             <AdminServices />
           ) : link === "Partners" ? (
             <AdminPartners />
+          ) : link === "Branches" ? (
+            <AdminAreas />
           ) : link === "News" ? (
             <AdminBlogs />
           ) : link === "Sermons" ? (

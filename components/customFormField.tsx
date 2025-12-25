@@ -49,10 +49,12 @@ import {
 } from "./ui/alert-dialog";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "./ui/input-otp";
 import clsx from "clsx";
+import { PhoneInput } from "./phone-input";
 
 export enum formFieldTypes {
   INPUT = "input",
   CALENDAR = "calendar",
+  PHONE_INPUT = "phoneInput",
   RADIO_BUTTON = "radioButton",
   SELECT = "select",
   TEXTAREA = "textarea",
@@ -95,6 +97,7 @@ interface FormConnectedProps extends BaseProps {
   fieldType:
     | formFieldTypes.INPUT
     | formFieldTypes.TEXTAREA
+    | formFieldTypes.PHONE_INPUT
     | formFieldTypes.CALENDAR
     | formFieldTypes.RADIO_BUTTON
     | formFieldTypes.SELECT
@@ -246,6 +249,19 @@ const RenderInput = ({ field, props }: { field: any; props: customProps }) => {
         </Popover>
       );
 
+    case formFieldTypes.PHONE_INPUT:
+          return (
+            <FormControl>
+              <PhoneInput
+                defaultCountry="ET"
+                countryCallingCodeEditable
+                international
+                {...field}
+                placeholder={props.placeholder}
+              />
+            </FormControl>
+          );
+        
     case formFieldTypes.RADIO_BUTTON:
       return (
         <RadioGroup
@@ -398,6 +414,7 @@ const RenderInput = ({ field, props }: { field: any; props: customProps }) => {
           </div>
         </FormControl>
       );
+    
     case formFieldTypes.SKELETON:
       return props.renderSkeleton ? props.renderSkeleton(field) : null;
     default:

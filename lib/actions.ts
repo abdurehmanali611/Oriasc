@@ -825,6 +825,79 @@ export async function DeletePartner(id: number) {
   }
 }
 
+export async function AreaPost(values: any) {
+  try {
+    const response = await axios.post(
+      `${api}/AreaPost`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
+export async function GetArea() {
+  try {
+    const response = await axios.get(
+      `${api}/GetArea`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+  }
+}
+
+export async function PatchArea(values: any, id: number) {
+  try {
+    const response = await axios.patch(
+      `${api}/PatchArea/${id}`,
+      values,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
+export async function DeleteArea(id: number) {
+  try {
+    const response = await axios.delete(
+      `${api}/DeleteArea/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = response.data;
+    return data;
+  } catch (error: any) {
+    console.log(error.message);
+    return;
+  }
+}
+
 export async function handleCloudinary(
   result: any,
   form: UseFormReturn<any>,
