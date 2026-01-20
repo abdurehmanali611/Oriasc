@@ -1,4 +1,3 @@
-// components/SermonsGrid.tsx
 import SectionHeader from "./SectionHeader";
 import SermonItem from "./SermonItem";
 
@@ -17,7 +16,6 @@ interface SermonsGridProps {
 export default function SermonsGrid({ sermons }: SermonsGridProps) {
   return (
     <>
-      {/* Sermons Grid Start */}
       <div className="w-full py-5">
         <div className="container mx-auto px-4 py-5 flex flex-col gap-5">
           <SectionHeader
@@ -46,7 +44,6 @@ export default function SermonsGrid({ sermons }: SermonsGridProps) {
           )}
         </div>
       </div>
-      {/* Sermons Grid End */}
     </>
   );
 }
